@@ -1,0 +1,256 @@
+*Users
+*NewUser
+NURSE
+Jane
+Doe
+5555555551
+1990-01-01
+jane@doe.com
+JaneDoe1990-01-01
+password1
+*NewUser
+NURSE
+Gail
+Smith
+5555555552
+1990-01-02
+gail@smith.com
+GailSmith1990-01-02
+password2
+*NewUser
+NURSE
+Tara
+Carter
+5555555553
+1990-01-03
+tara@carter.com
+TaraCarter1990-01-03
+password3
+*NewUser
+DOCTOR
+Jim
+Fitzgerald
+5555555554
+1990-01-04
+jim@fitzgerald.com
+JimFitzgerald1990-01-04
+password4
+Anesthesiology
+*NewUser
+DOCTOR
+Eloisa
+Germaine
+5555555555
+1990-01-05
+eloisa@germaine.com
+EloisaGermaine1990-01-05
+password5
+Dermatology
+*NewUser
+DOCTOR
+Lisa
+Murray
+5555555556
+1990-01-06
+lisa@murray.com
+LisaMurray1990-01-06
+password6
+Family Medicine
+*NewUser
+DOCTOR
+Jeremy
+Garfield
+5555555557
+1990-01-07
+jeremy@garfield.com
+JeremyGarfield1990-01-07
+password7
+Internal Medicine
+*NewUser
+PATIENT
+Bob
+Fischer
+5555555558
+1990-01-08
+bob@fischer.com
+BobFischer1990-01-08
+password8
+Peanuts
+Asthma
+Polio Vaccine
+JeremyGarfield1990-01-07
+Walgreens
+2000 S Mill Ave
+Tempe
+AZ
+85282
+Blue Cross Blue Shield
+1234
+18886302583
+*NewUser
+PATIENT
+Jerry
+Lewis
+5555555559
+1990-01-09
+jerry@lewis.com
+JerryLewis1990-01-09
+password9
+Wheat
+Diabetes
+Flu Vaccine
+LisaMurray1990-01-06
+CVS
+3303 S Rural Rd
+Tempe
+AZ
+85282
+Aetna
+12345
+18008723862
+*NewUser
+PATIENT
+Carrie
+Rodriguez
+5555555510
+1990-01-10
+carrie@rodriguez.com
+CarrieRodriguez1990-01-10
+password10
+Eggs
+Substance Abuse
+COVID-19 Vaccine
+EloisaGermaine1990-01-05
+Fry's
+3232 S Mill Ave
+Tempe
+AZ
+85282
+Cigna
+123456
+18009971654
+*NewUser
+PATIENT
+Alexander
+Winter
+4805555556
+1990-01-26
+alex@winter.com
+AlexanderWinter1990-01-26
+password101
+Grass
+Weight
+None
+EloisaGermaine1990-01-05
+Safeway
+926 E Broadway Rd
+Tempe
+AZ
+85282
+GEICO
+123456789
+4808278500
+*NewUser
+NURSE
+Stacy
+Smith
+null
+1988-01-08
+null
+StacySmith1988-01-08
+password
+*NewUser
+DOCTOR
+Jim
+Baren
+null
+1977-01-08
+null
+JimBaren1977-01-08
+password
+null
+*Messages
+*NewMessage
+CarrieRodriguez1990-01-10
+null
+NURSE
+Sore Throat Question
+My throat is sore, should I make an appointment to come in and see the doctor?
+Not if that is your only symptom, get rest and reach back out if the symptoms worsen.
+Thu Oct 28 15:30:00 MST 2021
+Fri Oct 29 09:45:00 MST 2021
+*NewMessage
+AlexanderWinter1990-01-26
+null
+NURSE
+Temperature Question
+How high does my temperature need to be to consider coming in for an appointment?
+Generally if it is above 100F and Tylenol does not help, we'd like for you to come in.
+Thu Oct 28 15:45:00 MST 2021
+Fri Oct 29 10:45:00 MST 2021
+*NewMessage
+AlexanderWinter1990-01-26
+EloisaGermaine1990-01-05
+DOCTOR
+Follow-up Question
+I forgot to ask about pain in my left arm, should I see a specialist?
+If the pain is severe, you should see a specialist.
+Fri Oct 29 15:45:00 MST 2021
+Sun Oct 31 10:45:00 MST 2021
+*Appointments
+*NewAppointment
+Fri Oct 29 08:00:00 MST 2021 AlexanderWinter1990-01-26 JeremyGarfield1990-01-07
+AlexanderWinter1990-01-26
+JeremyGarfield1990-01-07
+Flu like symptoms
+Fri Oct 29 08:00:00 MST 2021
+Flu like symptoms
+Congestion
+Z-pac
+100
+70
+68
+98
+150
+*NewAppointment
+Thu Oct 28 15:00:00 MST 2021 AlexanderWinter1990-01-26 LisaMurray1990-01-06
+AlexanderWinter1990-01-26
+LisaMurray1990-01-06
+Leg pain
+Thu Oct 28 15:00:00 MST 2021
+Leg pain
+Back nerve damage
+None
+101
+71
+68
+99
+152
+*NewAppointment
+Fri Nov 05 15:00:00 MST 2021 JerryLewis1990-01-09 EloisaGermaine1990-01-05
+JerryLewis1990-01-09
+EloisaGermaine1990-01-05
+Sore throat
+Fri Nov 05 15:00:00 MST 2021
+Sore throat
+Flu
+Steroid
+110
+75
+72
+100
+165
+*NewAppointment
+Wed Nov 03 15:00:00 MST 2021 AlexanderWinter1990-01-26 EloisaGermaine1990-01-05
+AlexanderWinter1990-01-26
+EloisaGermaine1990-01-05
+null
+Wed Nov 03 15:00:00 MST 2021
+null
+null
+null
+0
+0
+0
+0
+0

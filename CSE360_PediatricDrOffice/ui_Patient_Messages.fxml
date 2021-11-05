@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui_Patient_MessagesController">
+   <top>
+      <VBox prefHeight="79.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Pediatric Doctor's Office Portal" textAlignment="CENTER">
+               <font>
+                  <Font size="38.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <MenuBar fx:id="menuBar">
+               <menus>
+                  <Menu fx:id="menuBar_Account" mnemonicParsing="false" onAction="#menuBarClick_Account" />
+                  <Menu fx:id="menuBar_VisitHistory" mnemonicParsing="false" onAction="#menuBarClick_VisitHistory" />
+                  <Menu fx:id="menuBar_Messages" mnemonicParsing="false" onAction="#menuBarClick_Messages" />
+                  <Menu fx:id="menuBar_ScheduleAppt" mnemonicParsing="false" onAction="#menuBarClick_ScheduleAppt" />
+                  <Menu fx:id="menuBar_Doctors" mnemonicParsing="false" onAction="#menuBarClick_Doctors" />
+               </menus>
+            </MenuBar>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <VBox prefHeight="305.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="333.0" prefWidth="600.0">
+               <children>
+                  <VBox prefHeight="316.0" prefWidth="181.0">
+                     <children>
+                        <Label prefHeight="36.0" prefWidth="131.0" text="Create New Message">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="subjectTextField" promptText="Subject" />
+                        <TextArea fx:id="bodyTextArea" prefHeight="168.0" prefWidth="182.0" promptText="Describe Specific Health Question" wrapText="true" />
+                        <GridPane>
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="105.0" minWidth="10.0" prefWidth="74.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="148.0" minWidth="10.0" prefWidth="148.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Recipient" />
+                              <ComboBox fx:id="recipientType" prefWidth="150.0" promptText="Nurse or Doctor" GridPane.columnIndex="1" />
+                           </children>
+                        </GridPane>
+                        <Button fx:id="sendMessage" mnemonicParsing="false" onAction="#ButtonHandlerSendMessage" prefHeight="13.0" prefWidth="110.0" text="Send Message">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Label fx:id="labelNotification" textFill="RED" />
+                     </children>
+                  </VBox>
+                  <Separator orientation="VERTICAL" prefHeight="302.0" prefWidth="7.0" />
+                  <VBox prefHeight="320.0" prefWidth="136.0">
+                     <children>
+                        <Label text="Message History">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="(select to show details)">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font>
+                        </Label>
+                        <ListView fx:id="msgListView" onMouseClicked="#onMouseClickListViewHandler" prefHeight="291.0" prefWidth="161.0" />
+                     </children></VBox>
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+                  <VBox prefHeight="312.0" prefWidth="269.0">
+                     <children>
+                        <Label prefHeight="36.0" prefWidth="131.0" text="Message Details">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="messageDetailsTextArea" prefHeight="284.0" prefWidth="228.0" wrapText="true" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui_Nurse_ApptsController">
+   <top>
+      <VBox prefHeight="81.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Pediatric Doctor's Office Portal" textAlignment="CENTER">
+               <font>
+                  <Font size="38.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <MenuBar>
+              <menus>
+                <Menu fx:id="menuBar_Appointments" mnemonicParsing="false" onAction="#menuBarClick_Appointments" />
+                <Menu fx:id="menuBar_Patients" mnemonicParsing="false" onAction="#menuBarClick_Patients" />
+                <Menu fx:id="menuBar_Messages" mnemonicParsing="false" onAction="#menuBarClick_Messages" />
+              </menus>
+            </MenuBar>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="Today" />
+                <Menu mnemonicParsing="false" text="All" />
+                  <Menu mnemonicParsing="false" text="Search" />
+                  <Menu mnemonicParsing="false" text="Delete" />
+                  <Menu mnemonicParsing="false" text="New" />
+              </menus>
+            </MenuBar>
+            <TableView prefHeight="295.0" prefWidth="600.0">
+              <columns>
+                <TableColumn prefWidth="71.0" text="Date" />
+                <TableColumn prefWidth="79.0" text="Time" />
+                  <TableColumn prefWidth="118.0" text="Patient" />
+                  <TableColumn prefWidth="238.0" text="Reason" />
+                  <TableColumn prefWidth="89.0" text="Doctor" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui_Doctor_MessagesController">
+   <top>
+      <VBox prefHeight="408.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Pediatric Doctor's Office Portal" textAlignment="CENTER">
+               <font>
+                  <Font size="38.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <MenuBar>
+               <menus>
+                  <Menu fx:id="menuBar_Appointments" mnemonicParsing="false" onAction="#menuBarClick_Appointments" />
+                  <Menu fx:id="menuBar_Patients" mnemonicParsing="false" onAction="#menuBarClick_Patients" />
+                  <Menu fx:id="menuBar_Messages" mnemonicParsing="false" onAction="#menuBarClick_Messages" />
+               </menus>
+            </MenuBar>
+            <HBox prefHeight="332.0" prefWidth="600.0">
+               <children>
+                  <TableView prefHeight="320.0" prefWidth="397.0">
+                    <columns>
+                      <TableColumn prefWidth="66.0" text="From" />
+                        <TableColumn prefWidth="208.0" text="Subject" />
+                        <TableColumn minWidth="1.0" prefWidth="82.0" text="Date" />
+                    </columns>
+                  </TableView>
+                  <VBox prefHeight="100.0" prefWidth="283.0">
+                     <children>
+                        <HBox prefHeight="28.0" prefWidth="243.0">
+                           <children>
+                              <Button mnemonicParsing="false" text="Reply" />
+                              <Button mnemonicParsing="false" text="Delete" />
+                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="54.0" text="Call" />
+                           </children>
+                        </HBox>
+                        <TextArea prefHeight="295.0" prefWidth="243.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <VBox prefHeight="118.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
