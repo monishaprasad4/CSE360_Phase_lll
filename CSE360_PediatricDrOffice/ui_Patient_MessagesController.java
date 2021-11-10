@@ -1,5 +1,5 @@
 import java.net.URL;
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -8,25 +8,18 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBuilder;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
-
-import java.io.IOException;
-
-import java.util.ArrayList;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 public class ui_Patient_MessagesController {
 
 	private Stage primaryStage;
@@ -63,75 +56,75 @@ public class ui_Patient_MessagesController {
 	@FXML
     private void initialize() {
     	
-    	menuBar_Account.setGraphic(
-			ButtonBuilder.create()
-			    .text("Account")
-			    .onAction(new EventHandler<ActionEvent>(){
-			        @Override public void handle(ActionEvent t) {
-			        	try {
-							menuBarClick_Account(t);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-			         } })
-			        .build()
-		);
+    	Label label = new Label("Account");
+    	label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    	    @Override
+    	    public void handle(MouseEvent event) {
+    	    	try {
+    	    		menuBarClick_Account();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+    	    }
+    	});
     	
-    	menuBar_VisitHistory.setGraphic(
-			ButtonBuilder.create()
-			    .text("Visit History")
-			    .onAction(new EventHandler<ActionEvent>(){
-			        @Override public void handle(ActionEvent t) {
-			        	try {
-							menuBarClick_VisitHistory(t);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-			         } })
-			        .build()
-		);
+    	menuBar_Account.setGraphic(label);
     	
-    	menuBar_Messages.setGraphic(
-			ButtonBuilder.create()
-			    .text("Messages")
-			    .onAction(new EventHandler<ActionEvent>(){
-			        @Override public void handle(ActionEvent t) {
-			        	try {
-							menuBarClick_Messages(t);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-			         } })
-			        .build()
-		);
+    	label = new Label("Visit History");
+    	label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    	    @Override
+    	    public void handle(MouseEvent event) {
+    	    	try {
+    	    		menuBarClick_VisitHistory();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+    	    }
+    	});
     	
-    	menuBar_ScheduleAppt.setGraphic(
-			ButtonBuilder.create()
-			    .text("Schedule Appt")
-			    .onAction(new EventHandler<ActionEvent>(){
-			        @Override public void handle(ActionEvent t) {
-			        	try {
-							menuBarClick_ScheduleAppt(t);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-			         } })
-			        .build()
-		);
+    	menuBar_VisitHistory.setGraphic(label);
     	
-    	menuBar_Doctors.setGraphic(
-			ButtonBuilder.create()
-			    .text("Doctors")
-			    .onAction(new EventHandler<ActionEvent>(){
-			        @Override public void handle(ActionEvent t) {
-			        	try {
-							menuBarClick_Doctors(t);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-			         } })
-			        .build()
-		);
+    	label = new Label("Messages");
+    	label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    	    @Override
+    	    public void handle(MouseEvent event) {
+    	    	try {
+    	    		menuBarClick_Messages();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+    	    }
+    	});
+
+    	menuBar_Messages.setGraphic(label);    	
+
+    	label = new Label("Schedule Appt");
+    	label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    	    @Override
+    	    public void handle(MouseEvent event) {
+    	    	try {
+					menuBarClick_ScheduleAppt();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+    	    }
+    	});
+    	
+    	menuBar_ScheduleAppt.setGraphic(label);
+
+    	label = new Label("Doctors");
+    	label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    	    @Override
+    	    public void handle(MouseEvent event) {
+    	    	try {
+					menuBarClick_Doctors();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+    	    }
+    	});
+    	
+    	menuBar_Doctors.setGraphic(label);
     }   	
     
     public void initializeController(Stage stage, User currentUser, ITService currentITService) {
@@ -157,7 +150,7 @@ public class ui_Patient_MessagesController {
     }
     
     @FXML
-    private void menuBarClick_Account(ActionEvent event) throws Exception {
+    private void menuBarClick_Account() throws Exception {
     	System.out.println("Patient Account - Menu Bar Click - Account");
 
     	// switch UI
@@ -174,7 +167,7 @@ public class ui_Patient_MessagesController {
     }
     
     @FXML
-    private void menuBarClick_VisitHistory(ActionEvent event) throws Exception {
+    private void menuBarClick_VisitHistory() throws Exception {
     	System.out.println("Patient Account - Menu Bar Click - Visit History");
 
     	// switch UI
@@ -191,14 +184,14 @@ public class ui_Patient_MessagesController {
     }
     
     @FXML
-    private void menuBarClick_Messages(ActionEvent event) throws Exception {
+    private void menuBarClick_Messages() throws Exception {
     	System.out.println("Patient Account - Menu Bar Click - Messages");
 
     	// do nothing, already here
     }
     
     @FXML
-    private void menuBarClick_ScheduleAppt(ActionEvent event) throws Exception {
+    private void menuBarClick_ScheduleAppt() throws Exception {
     	System.out.println("Patient Account - Menu Bar Click - Schedule Appt");
 
     	// switch UI
@@ -215,7 +208,7 @@ public class ui_Patient_MessagesController {
     }
     
     @FXML
-    private void menuBarClick_Doctors(ActionEvent event) throws Exception {
+    private void menuBarClick_Doctors() throws Exception {
     	System.out.println("Patient Account - Menu Bar Click - Doctors");
 
     	// switch UI
