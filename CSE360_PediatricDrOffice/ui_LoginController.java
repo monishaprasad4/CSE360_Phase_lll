@@ -93,16 +93,23 @@ public class ui_LoginController {
         if (passwordTextField.getText() == null || passwordTextField.getText().trim().isEmpty()) {
         	emptyFieldCheck = true;
         }
-        if (birthdayDatePicker.getValue() == null) {
-        	emptyFieldCheck = true;
+        //if (birthdayDatePicker.getValue() == null) {
+//        	emptyFieldCheck = true;
+        //}
+        
+        if (birthdayDatePicker.getEditor().getText() == null || birthdayDatePicker.getEditor().getText().trim().isEmpty()) {
+        		emptyFieldCheck = true;
         }
-
+        
+        
         if (emptyFieldCheck) {
             System.out.println("Login - ERROR - at least one field is empty");
             // display error message if there are empty fields
         	labelNotification.setText("Please fill out all fields");
         } else {
             // all fields are input, check login attempt 
+        	birthdayDatePicker.setValue(birthdayDatePicker.getConverter()
+        		    .fromString(birthdayDatePicker.getEditor().getText()));
         	String firstName = firstNameTextField.getText();
 			String lastName = lastNameTextField.getText();
 			String password = passwordTextField.getText();
