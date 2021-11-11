@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Patient extends User {
@@ -9,7 +10,6 @@ public class Patient extends User {
 	private Pharmacy pharmacy;
 	private Insurance insurance;
 	private String doctorUniqueID;
-	private String doctor;
 
 	public Patient () {
 		super();
@@ -171,11 +171,26 @@ public class Patient extends User {
 			// don't set
 		} else {
 			this.doctorUniqueID = doctorUniqueID;
-			this.doctor = "Dr. Oz";
 		}
 	}
 	
+	/*
+private String knownAllergies;
+	private String previousHealthIssues;
+	private String prescribedMedications;
+	private String immunizationHistory;
+	private Pharmacy pharmacy;
+	private Insurance insurance;
+	private String doctorUniqueID;
+	private String doctor;
+
+	 */
 	public String toString() {
-		return super.getFirstName() + " " + super.getLastName();
+		return "Name: " + getFirstName() + " " + getLastName() + "\n" +
+				"DOB: " + super.getDOB() + "\n" +
+				"Phone: " + super.getPhoneNumber() + "\n" +
+				"Email: " + super.getEmail() + "\n\n" + 
+				 "Known Allergies: " + knownAllergies + "\n" +
+				 "Pharmacy: " + pharmacy.getName();
 	}
 }

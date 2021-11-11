@@ -5,6 +5,7 @@ public class PatientDataView
 	private String doctor;
 	private String lastVisit;
 	private String nextVisit;
+	private Patient patient;
 	
 	public PatientDataView(Patient patient, ITService currentITService)
 	{
@@ -12,6 +13,7 @@ public class PatientDataView
 		doctor = currentITService.getUserFullNameFromUniqueID(patient.getDoctorUniqueID());
 		lastVisit = "1/1/1970";
 		nextVisit = "1/1/1980";
+		this.patient = patient;
 	}
 	
 	public String getFullName()
@@ -32,5 +34,10 @@ public class PatientDataView
 	public String getNextVisit()
 	{
 		return nextVisit;
+	}
+	
+	public Patient getPatient()
+	{
+		return patient;
 	}
 }

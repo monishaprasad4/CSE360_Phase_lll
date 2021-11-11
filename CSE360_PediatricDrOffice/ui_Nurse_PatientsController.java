@@ -43,6 +43,7 @@ public class ui_Nurse_PatientsController {
     @FXML private TableColumn<PatientDataView, String> doctorColumn;
 	@FXML private TableColumn<PatientDataView, String> lastVisitColumn;
 	@FXML private TableColumn<PatientDataView, String> nextVisitColumn;
+	@FXML private TextArea patientDetails;
 	
 	private ITService currentITService;
 	private User currentUser;
@@ -130,6 +131,26 @@ public class ui_Nurse_PatientsController {
     	
     	ObservableList data = FXCollections.observableList(patientDataList);
     	tableView_Patients.setItems(data);
+    	
+    	/*
+    	tableView_Patients.setOnMousePressed(new EventHandler<MouseEvent>() {
+    	    @Override
+    	    public void handle(MouseEvent event) {
+    	    	try {
+    	    		Patient patient = tableView_Patients.getSelectionModel().getSelectedItem().getPatient();
+    	    		patientDetails.setText(patient.getFirstName());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+    	    }
+    	});
+    	*/
+    	tableView_Patients.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+    	    if (newSelection != null) {
+        		Patient patient = tableView_Patients.getSelectionModel().getSelectedItem().getPatient();
+	    		patientDetails.setText(patient.toString());
+    	    }
+    	});
     }
     
     @FXML
