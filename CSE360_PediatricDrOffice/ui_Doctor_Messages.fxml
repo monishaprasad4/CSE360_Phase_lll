@@ -40,11 +40,11 @@
             </MenuBar>
             <HBox prefHeight="332.0" prefWidth="600.0">
                <children>
-                  <TableView prefHeight="320.0" prefWidth="397.0">
+                  <TableView fx:id="tableView_Messages" prefHeight="320.0" prefWidth="397.0">
                     <columns>
-                      <TableColumn prefWidth="66.0" text="From" />
-                        <TableColumn prefWidth="208.0" text="Subject" />
-                        <TableColumn minWidth="1.0" prefWidth="82.0" text="Date" />
+                      <TableColumn fx:id="fromColumn" prefWidth="66.0" text="From" />
+                        <TableColumn fx:id="subjectColumn" prefWidth="208.0" text="Subject" />
+                        <TableColumn fx:id="dateColumn" minWidth="1.0" prefWidth="82.0" text="Date" />
                     </columns>
                   </TableView>
                   <VBox prefHeight="100.0" prefWidth="283.0">

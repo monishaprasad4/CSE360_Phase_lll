@@ -118,8 +118,16 @@ public class ui_Nurse_ApptsController {
     	    System.out.println("Closing, print updated information to database (file)");
     	    currentITService.printToFile();
     	});
-    	    	
-    	ArrayList<Appointment> list = currentITService.getAppointments();
+    	
+    	ArrayList<Appointment> list;
+    	if (currentUser.getUserType() == UserType.NURSE)
+    	{
+    		list = currentITService.getAppointments();
+    	}
+    	else
+    	{
+    		list = currentITService.getAppointmentsForUser(currentUser.getUniqueID());
+    	}
     	
     	ArrayList<AppointmentDataView> appointmentDataList = new ArrayList<AppointmentDataView>();
     	for(int i = 0; i < list.size(); i++)
