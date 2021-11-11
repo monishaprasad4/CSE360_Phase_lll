@@ -130,8 +130,6 @@ public class ui_Nurse_PatientsController {
     	
     	ObservableList data = FXCollections.observableList(patientDataList);
     	tableView_Patients.setItems(data);
-    	// TODO - load current session information and prefill table
-    	
     }
     
     @FXML

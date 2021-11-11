@@ -1,14 +1,18 @@
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -20,6 +24,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 import java.io.IOException;
 
@@ -30,6 +36,12 @@ public class ui_Doctor_PatientsController {
 	@FXML private Menu menuBar_Appointments;
 	@FXML private Menu menuBar_Patients;
 	@FXML private Menu menuBar_Messages;
+	
+	@FXML private TableView<PatientDataView> tableView_Patients;
+    @FXML private TableColumn<PatientDataView, String> nameColumn;
+    @FXML private TableColumn<PatientDataView, String> lastVisitColumn;
+	@FXML private TableColumn<PatientDataView, String> nextVisitColumn;
+	
 	private ITService currentITService; private User currentUser;
 		
     @FXML
@@ -87,6 +99,10 @@ public class ui_Doctor_PatientsController {
     	});
     	
     	menuBar_Messages.setGraphic(label);
+    	
+    	nameColumn.setCellValueFactory(new PropertyValueFactory<PatientDataView, String>("fullName"));
+    	lastVisitColumn.setCellValueFactory(new PropertyValueFactory<PatientDataView, String>("lastVisit"));
+    	nextVisitColumn.setCellValueFactory(new PropertyValueFactory<PatientDataView, String>("nextVisit"));
     }   	
     
     public void initializeController(Stage stage, User currentUser, ITService currentITService) {
@@ -99,8 +115,16 @@ public class ui_Doctor_PatientsController {
     	    currentITService.printToFile();
     	});
     	
-    	// TODO - load current session information and prefill table
+    	ArrayList<User> list = currentITService.getPatientsForDoctor(currentUser.getCredentials().getUniqueID());
     	
+    	ArrayList<PatientDataView> patientDataList = new ArrayList<PatientDataView>();
+    	for(int i = 0; i < list.size(); i++)
+    	{
+    		patientDataList.add(new PatientDataView((Patient)list.get(i), currentITService));
+    	}
+    	
+    	ObservableList data = FXCollections.observableList(patientDataList);
+    	tableView_Patients.setItems(data);    	
     }
     
     @FXML

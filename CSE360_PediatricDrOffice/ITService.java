@@ -3,6 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Scanner;
 import java.io.File;  
 import java.io.IOException;
@@ -542,6 +543,27 @@ public class ITService {
 		
 		return userList;
 	}
+	
+	public ArrayList<User> getPatientsForDoctor(String doctorId) {
+		ArrayList<User> userList = new ArrayList<User>();
+
+		// loop thro' all users, check for patients, add to array list
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getUserType() == UserType.PATIENT) {
+				Patient patient = (Patient) users.get(i);
+				if (Objects.equals(patient.getDoctorUniqueID(), doctorId))
+				{				
+					// patient, add to array list
+					userList.add(users.get(i));
+				}
+			}
+		}
+		
+		Sorts.sortUsers(userList, new UserComparator());
+		
+		return userList;
+	}
+
 
 	public void newMessage(Message message) {
 		messages.add(message);
