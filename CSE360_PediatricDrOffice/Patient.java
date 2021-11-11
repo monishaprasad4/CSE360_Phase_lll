@@ -9,6 +9,7 @@ public class Patient extends User {
 	private Pharmacy pharmacy;
 	private Insurance insurance;
 	private String doctorUniqueID;
+	private String doctor;
 
 	public Patient () {
 		super();
@@ -170,6 +171,7 @@ public class Patient extends User {
 			// don't set
 		} else {
 			this.doctorUniqueID = doctorUniqueID;
+			this.doctor = "Dr. Oz";
 		}
 	}
 	

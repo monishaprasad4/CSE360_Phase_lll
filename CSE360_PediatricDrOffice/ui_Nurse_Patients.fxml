@@ -42,12 +42,12 @@
             </MenuBar>
             <HBox prefHeight="332.0" prefWidth="600.0">
                <children>
-                  <TableView prefHeight="320.0" prefWidth="397.0">
+                  <TableView fx:id="tableView_Patients" prefHeight="320.0" prefWidth="397.0">
                     <columns>
-                      <TableColumn prefWidth="77.0" text="Name" />
-                        <TableColumn prefWidth="90.0" text="Doctor" />
-                        <TableColumn minWidth="2.0" prefWidth="97.0" text="Last Visit" />
-                        <TableColumn prefWidth="87.0" text="Next Visit" />
+                      <TableColumn fx:id="nameColumn" prefWidth="77.0" text="Name" />
+                        <TableColumn fx:id="doctorColumn" prefWidth="90.0" text="Doctor" />
+                        <TableColumn fx:id="lastVisitColumn" minWidth="2.0" prefWidth="97.0" text="Last Visit" />
+                        <TableColumn fx:id="nextVisitColumn" prefWidth="87.0" text="Next Visit" />
                     </columns>
                   </TableView>
                   <VBox prefHeight="100.0" prefWidth="283.0">

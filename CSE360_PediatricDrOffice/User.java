@@ -1,6 +1,8 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public abstract class User {
 
 	private String firstName;
@@ -10,6 +12,7 @@ public abstract class User {
 	private String email;
 	private Credentials credentials;
 	private UserType userType;
+	private SimpleStringProperty fullName;
 	
 	public User() {
 		credentials = new Credentials();
@@ -72,7 +75,14 @@ public abstract class User {
 		}
 		
 	}
-
+	
+	public String getName() {
+		return this.lastName + "," + this.firstName;
+	}
+	
+	public void setName(String name) {
+	}
+	
 	public LocalDate getDOB() {
 		return DOB;
 	}
@@ -105,5 +115,8 @@ public abstract class User {
 		}
 	}
 	
+	public SimpleStringProperty getFullName() {
+		return new SimpleStringProperty(lastName + ", " + firstName);
+	}
 	public abstract String toString();
 }

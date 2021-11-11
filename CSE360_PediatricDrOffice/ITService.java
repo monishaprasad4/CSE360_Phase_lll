@@ -402,6 +402,8 @@ public class ITService {
 		return null;
 	}
 	
+	 
+	
 	public ArrayList<String> getDoctorsForListView(ArrayList<User> doctors) {
 		ArrayList<String> doctorsForListView = new ArrayList<String>();
 		
@@ -733,6 +735,11 @@ public class ITService {
 		}
 		
 		return upcomingAvailableAppointmentsForDoctor;
+	}
+	
+	public ArrayList<Appointment> getAppointments()
+	{
+		return appointments;
 	}
 	
 	void createDataAndPrintToFile() {
