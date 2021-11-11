@@ -50,13 +50,13 @@
                   <Menu mnemonicParsing="false" text="New" />
               </menus>
             </MenuBar>
-            <TableView prefHeight="295.0" prefWidth="600.0">
+            <TableView fx:id="tableView_Appointments" prefHeight="295.0" prefWidth="600.0">
               <columns>
-                <TableColumn prefWidth="71.0" text="Date" />
-                <TableColumn prefWidth="79.0" text="Time" />
-                  <TableColumn prefWidth="118.0" text="Patient" />
-                  <TableColumn prefWidth="238.0" text="Reason" />
-                  <TableColumn prefWidth="89.0" text="Doctor" />
+                <TableColumn fx:id="dateColumn" prefWidth="71.0" text="Date" />
+                <TableColumn fx:id="timeColumn" prefWidth="79.0" text="Time" />
+                  <TableColumn fx:id="patientColumn" prefWidth="118.0" text="Patient" />
+                  <TableColumn fx:id="reasonColumn" prefWidth="238.0" text="Reason" />
+                  <TableColumn fx:id="doctorColumn" prefWidth="89.0" text="Doctor" />
               </columns>
             </TableView>
          </children>

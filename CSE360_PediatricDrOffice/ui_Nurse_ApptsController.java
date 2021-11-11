@@ -1,14 +1,18 @@
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -20,6 +24,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 import java.io.IOException;
 
@@ -30,6 +36,13 @@ public class ui_Nurse_ApptsController {
 	@FXML private Menu menuBar_Appointments;
 	@FXML private Menu menuBar_Patients;
 	@FXML private Menu menuBar_Messages;
+	@FXML private TableView<AppointmentDataView> tableView_Appointments;
+    @FXML private TableColumn<AppointmentDataView, String> dateColumn;
+    @FXML private TableColumn<AppointmentDataView, String> timeColumn;
+    @FXML private TableColumn<AppointmentDataView, String> patientColumn;
+    @FXML private TableColumn<AppointmentDataView, String> reasonColumn;
+    @FXML private TableColumn<AppointmentDataView, String> doctorColumn;
+    
 	private ITService currentITService;
 	private User currentUser;
 		
@@ -88,6 +101,12 @@ public class ui_Nurse_ApptsController {
     	});
     	
     	menuBar_Messages.setGraphic(label);
+    	
+    	dateColumn.setCellValueFactory(new PropertyValueFactory<AppointmentDataView, String>("date"));
+    	timeColumn.setCellValueFactory(new PropertyValueFactory<AppointmentDataView, String>("time"));
+    	patientColumn.setCellValueFactory(new PropertyValueFactory<AppointmentDataView, String>("patientFullName"));
+    	reasonColumn.setCellValueFactory(new PropertyValueFactory<AppointmentDataView, String>("reason"));
+    	doctorColumn.setCellValueFactory(new PropertyValueFactory<AppointmentDataView, String>("doctorFullName"));    	
     }   	
     
     public void initializeController(Stage stage, User currentUser, ITService currentITService) {
@@ -100,7 +119,16 @@ public class ui_Nurse_ApptsController {
     	    currentITService.printToFile();
     	});
     	    	
-    	// TODO - load current session information and prefill table
+    	ArrayList<Appointment> list = currentITService.getAppointments();
+    	
+    	ArrayList<AppointmentDataView> appointmentDataList = new ArrayList<AppointmentDataView>();
+    	for(int i = 0; i < list.size(); i++)
+    	{
+    		appointmentDataList.add(new AppointmentDataView(list.get(i), currentITService));
+    	}
+    	
+    	ObservableList data = FXCollections.observableList(appointmentDataList);
+    	tableView_Appointments.setItems(data);
     	
     }
     
