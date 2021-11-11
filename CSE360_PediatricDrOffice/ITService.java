@@ -560,6 +560,11 @@ public class ITService {
 		}
 		
 	}
+	
+	public ArrayList<Message> getMessages() 
+	{
+		return messages;
+	}
 
 	public ArrayList<Appointment> getAppointmentsForUser(String userUniqueID) {
 		int i = getUserIndex(userUniqueID);
