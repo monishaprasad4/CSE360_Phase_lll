@@ -45,6 +45,12 @@ public class ui_Nurse_MessagesController {
     @FXML private TableColumn<MessageDataView, String> subjectColumn;
     @FXML private TableColumn<MessageDataView, String> dateColumn;
     
+    @FXML private Button button_MessageReply;
+    @FXML private Button button_MessageDelete;
+    @FXML private Button button_MessageCall;
+    
+    @FXML private TextArea textArea_MessageDetails;
+    
 	private ITService currentITService;
 	private User currentUser;
 		
@@ -103,7 +109,41 @@ public class ui_Nurse_MessagesController {
     	});
     	
     	menuBar_Messages.setGraphic(label);
+    	
+    	button_MessageReply.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    	    @Override
+    	    public void handle(MouseEvent event) {
+    	    	try {
+					buttonClick_Reply();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+    	    }
+    	});
     	    	
+    	button_MessageDelete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    	    @Override
+    	    public void handle(MouseEvent event) {
+    	    	try {
+					buttonClick_Delete();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+    	    }
+    	});
+    	
+    	button_MessageCall.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    	    @Override
+    	    public void handle(MouseEvent event) {
+    	    	try {
+					buttonClick_Call();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+    	    }
+    	});
+
+
     	fromColumn.setCellValueFactory(new PropertyValueFactory<MessageDataView, String>("from"));
     	toColumn.setCellValueFactory(new PropertyValueFactory<MessageDataView, String>("to"));
     	subjectColumn.setCellValueFactory(new PropertyValueFactory<MessageDataView, String>("subject"));
@@ -130,6 +170,18 @@ public class ui_Nurse_MessagesController {
     	
     	ObservableList data = FXCollections.observableList(messageDataList);
     	tableView_Messages.setItems(data);
+    	
+    	tableView_Messages.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+    	    if (newSelection != null) {
+        		Message message = tableView_Messages.getSelectionModel().getSelectedItem().getMessage();
+	    		textArea_MessageDetails.setText(message.toString());
+    	    }
+    	});
+    	
+    	if (tableView_Messages.getItems().size() > 0) {    	
+    		tableView_Messages.getSelectionModel().selectFirst();
+    	}
+
     }
     
     @FXML
@@ -171,5 +223,20 @@ public class ui_Nurse_MessagesController {
     	System.out.println("Nurse Messages - Menu Bar Click - Messages");
 
     	// do nothing, already here
-    }    
+    }
+    
+    @FXML
+    private void buttonClick_Reply() throws Exception {
+    	System.out.println("Message Reply");
+    }
+    
+    @FXML
+    private void buttonClick_Delete() throws Exception {
+    	System.out.println("Message Delete");
+    }
+    
+    @FXML
+    private void buttonClick_Call() throws Exception {
+    	System.out.println("Message Call");
+    }
 }

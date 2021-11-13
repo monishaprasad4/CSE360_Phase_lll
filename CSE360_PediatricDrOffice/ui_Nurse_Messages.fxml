@@ -52,12 +52,12 @@
                      <children>
                         <HBox prefHeight="28.0" prefWidth="243.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Reply" />
-                              <Button mnemonicParsing="false" text="Delete" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="54.0" text="Call" />
+                              <Button fx:id="button_MessageReply" mnemonicParsing="false" text="Reply" />
+                              <Button fx:id="button_MessageDelete" mnemonicParsing="false" text="Delete" />
+                              <Button fx:id="button_MessageCall" mnemonicParsing="false" prefHeight="25.0" prefWidth="54.0" text="Call" />
                            </children>
                         </HBox>
-                        <TextArea prefHeight="295.0" prefWidth="243.0" />
+                        <TextArea fx:id="textArea_MessageDetails" prefHeight="295.0" prefWidth="243.0" />
                      </children>
                   </VBox>
                </children>
