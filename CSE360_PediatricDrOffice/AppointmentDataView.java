@@ -5,6 +5,7 @@ public class AppointmentDataView {
 	private String patientFullName;
 	private String reason;
 	private String doctorFullName;
+	private Appointment appointment;
 	
     @SuppressWarnings("deprecation")
 	public AppointmentDataView(Appointment appointment, ITService itService)
@@ -15,6 +16,7 @@ public class AppointmentDataView {
 		patientFullName = itService.getUserFullNameFromUniqueID(appointment.getPatientUniqueID());
 		reason = appointment.getReason();
 		doctorFullName = itService.getUserFullNameFromUniqueID(appointment.getDoctorUniqueID());
+		this.appointment = appointment;
 	}
 	
 	public String getDate()
@@ -40,5 +42,10 @@ public class AppointmentDataView {
 	public String getDoctorFullName()
 	{
 		return doctorFullName;
+	}
+	
+	public Appointment getAppointment()
+	{
+		return appointment;
 	}
 }
