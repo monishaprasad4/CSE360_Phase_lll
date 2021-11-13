@@ -174,18 +174,7 @@ public class Patient extends User {
 		}
 	}
 	
-	/*
-private String knownAllergies;
-	private String previousHealthIssues;
-	private String prescribedMedications;
-	private String immunizationHistory;
-	private Pharmacy pharmacy;
-	private Insurance insurance;
-	private String doctorUniqueID;
-	private String doctor;
-
-	 */
-	public String toString() {
+	public  String toString() {
 		return "Name: " + getFirstName() + " " + getLastName() + "\n" +
 				"DOB: " + super.getDOB() + "\n" +
 				"Phone: " + super.getPhoneNumber() + "\n" +
