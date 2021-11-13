@@ -42,6 +42,8 @@ public class ui_Doctor_PatientsController {
     @FXML private TableColumn<PatientDataView, String> lastVisitColumn;
 	@FXML private TableColumn<PatientDataView, String> nextVisitColumn;
 	
+	@FXML private TextArea patientDetails;
+	
 	private ITService currentITService; private User currentUser;
 		
     @FXML
@@ -125,6 +127,17 @@ public class ui_Doctor_PatientsController {
     	
     	ObservableList data = FXCollections.observableList(patientDataList);
     	tableView_Patients.setItems(data);    	
+    	
+    	tableView_Patients.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+    	    if (newSelection != null) {
+        		Patient patient = tableView_Patients.getSelectionModel().getSelectedItem().getPatient();
+	    		patientDetails.setText(patient.toString());
+    	    }
+    	});
+    	
+    	if (tableView_Patients.getItems().size() > 0) {    	
+    		tableView_Patients.getSelectionModel().selectFirst();
+    	}
     }
     
     @FXML
