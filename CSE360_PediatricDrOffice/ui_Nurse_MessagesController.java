@@ -14,8 +14,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -101,7 +103,7 @@ public class ui_Nurse_MessagesController {
     	});
     	
     	menuBar_Messages.setGraphic(label);
-    	
+    	    	
     	fromColumn.setCellValueFactory(new PropertyValueFactory<MessageDataView, String>("from"));
     	toColumn.setCellValueFactory(new PropertyValueFactory<MessageDataView, String>("to"));
     	subjectColumn.setCellValueFactory(new PropertyValueFactory<MessageDataView, String>("subject"));
@@ -128,7 +130,6 @@ public class ui_Nurse_MessagesController {
     	
     	ObservableList data = FXCollections.observableList(messageDataList);
     	tableView_Messages.setItems(data);
-    	
     }
     
     @FXML
