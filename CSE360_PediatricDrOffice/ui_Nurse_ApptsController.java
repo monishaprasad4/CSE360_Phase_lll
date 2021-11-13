@@ -18,7 +18,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -36,6 +38,11 @@ public class ui_Nurse_ApptsController {
 	@FXML private Menu menuBar_Appointments;
 	@FXML private Menu menuBar_Patients;
 	@FXML private Menu menuBar_Messages;
+	@FXML private Menu menuBar_Today;
+	@FXML private Menu menuBar_All;
+	@FXML private Menu menuBar_Search;
+	@FXML private Menu menuBar_Delete;
+	@FXML private Menu menuBar_New;
 	@FXML private TableView<AppointmentDataView> tableView_Appointments;
     @FXML private TableColumn<AppointmentDataView, String> dateColumn;
     @FXML private TableColumn<AppointmentDataView, String> timeColumn;
@@ -102,6 +109,76 @@ public class ui_Nurse_ApptsController {
     	
     	menuBar_Messages.setGraphic(label);
     	
+    	label = new Label("Today");
+    	label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    	    @Override
+    	    public void handle(MouseEvent event) {
+    	    	try {
+    	    		menuBarClick_Appointments_Today();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+    	    }
+    	});
+    	
+    	menuBar_Today.setGraphic(label);
+    	
+    	label = new Label("All");
+    	label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    	    @Override
+    	    public void handle(MouseEvent event) {
+    	    	try {
+    	    		menuBarClick_Appointments_All();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+    	    }
+    	});
+    	
+    	menuBar_All.setGraphic(label);
+    	
+    	label = new Label("Search");
+    	label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    	    @Override
+    	    public void handle(MouseEvent event) {
+    	    	try {
+    	    		menuBarClick_Appointments_Search();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+    	    }
+    	});
+    	
+    	menuBar_Search.setGraphic(label);
+    	
+    	label = new Label("Delete");
+    	label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    	    @Override
+    	    public void handle(MouseEvent event) {
+    	    	try {
+    	    		menuBarClick_Appointments_Delete();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+    	    }
+    	});
+    	
+    	menuBar_Delete.setGraphic(label);
+    	
+    	label = new Label("New");
+    	label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    	    @Override
+    	    public void handle(MouseEvent event) {
+    	    	try {
+    	    		menuBarClick_Appointments_New();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+    	    }
+    	});
+    	
+    	menuBar_New.setGraphic(label);
+    	
     	dateColumn.setCellValueFactory(new PropertyValueFactory<AppointmentDataView, String>("date"));
     	timeColumn.setCellValueFactory(new PropertyValueFactory<AppointmentDataView, String>("time"));
     	patientColumn.setCellValueFactory(new PropertyValueFactory<AppointmentDataView, String>("patientFullName"));
@@ -119,25 +196,7 @@ public class ui_Nurse_ApptsController {
     	    currentITService.printToFile();
     	});
     	
-    	ArrayList<Appointment> list;
-    	if (currentUser.getUserType() == UserType.NURSE)
-    	{
-    		list = currentITService.getAppointments();
-    	}
-    	else
-    	{
-    		list = currentITService.getAppointmentsForUser(currentUser.getUniqueID());
-    	}
-    	
-    	ArrayList<AppointmentDataView> appointmentDataList = new ArrayList<AppointmentDataView>();
-    	for(int i = 0; i < list.size(); i++)
-    	{
-    		appointmentDataList.add(new AppointmentDataView(list.get(i), currentITService));
-    	}
-    	
-    	ObservableList data = FXCollections.observableList(appointmentDataList);
-    	tableView_Appointments.setItems(data);
-    	
+    	updateAppointmentsList();
     }
     
     @FXML
@@ -221,5 +280,70 @@ public class ui_Nurse_ApptsController {
             primaryStage.setScene(scene);
             primaryStage.show();
     	}
-    }    
+    }
+    
+    @FXML
+    private void menuBarClick_Appointments_New() throws Exception {
+    	System.out.println("New Appointment");
+    }
+    
+    @FXML
+    private void menuBarClick_Appointments_All() throws Exception {
+    	System.out.println("Display All Appointments");
+    }
+    
+    @FXML
+    private void menuBarClick_Appointments_Search() throws Exception {
+    	System.out.println("Search Appointment");
+    }
+    
+    @FXML
+    private void menuBarClick_Appointments_Delete() throws Exception {
+    	System.out.println("Delete Appointment");
+    	
+    	if (tableView_Appointments.getItems().size() > 0) {
+    		
+    		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Delete this appointment?", ButtonType.YES, ButtonType.NO);
+    		alert.setTitle("Doctor's Office Portal");
+	        ButtonType result = alert.showAndWait().orElse(ButtonType.NO);
+    	        
+  	        if (ButtonType.YES.equals(result)) {
+  	        	Appointment appt = tableView_Appointments.getSelectionModel().getSelectedItem().getAppointment();
+  	        	currentITService.cancelAppointment(appt);
+    		
+  	        	updateAppointmentsList();
+  	        }
+    	}
+    }
+    
+    @FXML
+    private void menuBarClick_Appointments_Today() throws Exception {
+    	System.out.println("Appointments Today");
+    }
+    
+    private void updateAppointmentsList()
+    {
+    	ArrayList<Appointment> list;
+    	if (currentUser.getUserType() == UserType.NURSE)
+    	{
+    		list = currentITService.getAppointments();
+    	}
+    	else
+    	{
+    		list = currentITService.getAppointmentsForUser(currentUser.getUniqueID());
+    	}
+    	
+    	ArrayList<AppointmentDataView> appointmentDataList = new ArrayList<AppointmentDataView>();
+    	for(int i = 0; i < list.size(); i++)
+    	{
+    		appointmentDataList.add(new AppointmentDataView(list.get(i), currentITService));
+    	}
+    	
+    	ObservableList data = FXCollections.observableList(appointmentDataList);
+    	tableView_Appointments.setItems(data);
+    	
+    	if (tableView_Appointments.getItems().size() > 0) {
+    		tableView_Appointments.getSelectionModel().selectFirst();
+    	}
+    }
 }

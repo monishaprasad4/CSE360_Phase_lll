@@ -43,11 +43,11 @@
          <children>
             <MenuBar>
               <menus>
-                <Menu mnemonicParsing="false" text="Today" />
-                <Menu mnemonicParsing="false" text="All" />
-                  <Menu mnemonicParsing="false" text="Search" />
-                  <Menu mnemonicParsing="false" text="Delete" />
-                  <Menu mnemonicParsing="false" text="New" />
+                <Menu fx:id="menuBar_Today" mnemonicParsing="false" />
+                <Menu fx:id="menuBar_All" mnemonicParsing="false" />
+                  <Menu fx:id="menuBar_Search" mnemonicParsing="false" onAction="#menuBarClick_Appointments_Search" />
+                  <Menu fx:id="menuBar_Delete" mnemonicParsing="false" />
+                  <Menu fx:id="menuBar_New" mnemonicParsing="false" />
               </menus>
             </MenuBar>
             <TableView fx:id="tableView_Appointments" prefHeight="295.0" prefWidth="600.0">
