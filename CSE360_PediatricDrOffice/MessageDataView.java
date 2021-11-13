@@ -10,8 +10,8 @@ public class MessageDataView {
 		from = itService.getUserFullNameFromUniqueID(message.getSenderUniqueID());
 		to = itService.getUserFullNameFromUniqueID(message.getReceiverUniqueID());
 		subject = message.getSubject();
-		date = message.getSentDate().getMonth() + "/" + 
-				message.getSentDate().getDay() + "/" + (message.getSentDate().getYear()-1900);
+		date = (message.getSentDate().getMonth()+1) + "/" + 
+				message.getSentDate().getDay() + "/" + (message.getSentDate().getYear()+1900);
 	}
 	
 	public String getFrom()
