@@ -4,6 +4,7 @@ public class MessageDataView {
 	private String to;
 	private String subject;
 	private String date;
+	private Message message;
 	
 	public MessageDataView(Message message, ITService itService)
 	{
@@ -12,6 +13,8 @@ public class MessageDataView {
 		subject = message.getSubject();
 		date = (message.getSentDate().getMonth()+1) + "/" + 
 				message.getSentDate().getDay() + "/" + (message.getSentDate().getYear()+1900);
+		
+		this.message = message;
 	}
 	
 	public String getFrom()
@@ -32,5 +35,10 @@ public class MessageDataView {
 	public String getDate()
 	{
 		return date;
+	}
+	
+	public Message getMessage()
+	{
+		return message;
 	}
 }
