@@ -132,25 +132,16 @@ public class ui_Nurse_PatientsController {
     	ObservableList data = FXCollections.observableList(patientDataList);
     	tableView_Patients.setItems(data);
     	
-    	/*
-    	tableView_Patients.setOnMousePressed(new EventHandler<MouseEvent>() {
-    	    @Override
-    	    public void handle(MouseEvent event) {
-    	    	try {
-    	    		Patient patient = tableView_Patients.getSelectionModel().getSelectedItem().getPatient();
-    	    		patientDetails.setText(patient.getFirstName());
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-    	    }
-    	});
-    	*/
     	tableView_Patients.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
     	    if (newSelection != null) {
         		Patient patient = tableView_Patients.getSelectionModel().getSelectedItem().getPatient();
 	    		patientDetails.setText(patient.toString());
     	    }
     	});
+    	
+    	if (tableView_Patients.getItems().size() > 0) {    	
+    		tableView_Patients.getSelectionModel().selectFirst();
+    	}
     }
     
     @FXML
