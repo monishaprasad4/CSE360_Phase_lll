@@ -179,7 +179,7 @@ public class Patient extends User {
 				"DOB: " + super.getDOB() + "\n" +
 				"Phone: " + super.getPhoneNumber() + "\n" +
 				"Email: " + super.getEmail() + "\n\n" + 
-				 "Known Allergies: " + knownAllergies + "\n" +
-				 "Pharmacy: " + pharmacy.getName();
+				"Known Allergies: " + knownAllergies + "\n" +
+				"Pharmacy: " + pharmacy.getName();
 	}
 }
