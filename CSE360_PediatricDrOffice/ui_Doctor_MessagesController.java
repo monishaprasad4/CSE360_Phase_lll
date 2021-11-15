@@ -18,7 +18,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -155,27 +157,7 @@ public class ui_Doctor_MessagesController {
     	    currentITService.printToFile();
     	});
     	
-    	ArrayList<Message> list = currentITService.getMessagesForUser(currentUser);
-    	
-    	ArrayList<MessageDataView> messageDataList = new ArrayList<MessageDataView>();
-    	for(int i = 0; i < list.size(); i++)
-    	{
-    		messageDataList.add(new MessageDataView(list.get(i), currentITService));
-    	}
-    	
-    	ObservableList data = FXCollections.observableList(messageDataList);
-    	tableView_Messages.setItems(data);
-    	
-    	tableView_Messages.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-    	    if (newSelection != null) {
-        		Message message = tableView_Messages.getSelectionModel().getSelectedItem().getMessage();
-	    		textArea_MessageDetails.setText(message.toString());
-    	    }
-    	});
-    	
-    	if (tableView_Messages.getItems().size() > 0) {    	
-    		tableView_Messages.getSelectionModel().selectFirst();
-    	}
+    	updateMessageView();
     }
     
     @FXML
@@ -225,11 +207,47 @@ public class ui_Doctor_MessagesController {
     
     @FXML
     private void buttonClick_Delete() throws Exception {
-    	System.out.println("Message Delete");
+    	Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Delete this message?", ButtonType.YES, ButtonType.NO);
+		alert.setTitle("Doctor's Office Portal");
+        ButtonType result = alert.showAndWait().orElse(ButtonType.NO);
+        if (ButtonType.YES.equals(result)) {
+	    	if (tableView_Messages.getSelectionModel().getSelectedIndex() >= 0) 
+	    	{
+	    		Message message = tableView_Messages.getSelectionModel().getSelectedItem().getMessage();
+	    		System.out.println("Delete message YES! " + message.getSubject());
+	    		currentITService.deleteMessage(message.getMessageUniqueID());
+	    		updateMessageView();
+	    	}
+        }
     }
     
     @FXML
     private void buttonClick_Call() throws Exception {
     	System.out.println("Message Call");
+    }
+    
+    private void updateMessageView()
+    {
+    	ArrayList<Message> list = currentITService.getMessages();
+    	
+    	ArrayList<MessageDataView> messageDataList = new ArrayList<MessageDataView>();
+    	for(int i = 0; i < list.size(); i++)
+    	{
+    		messageDataList.add(new MessageDataView(list.get(i), currentITService));
+    	}
+    	
+    	ObservableList data = FXCollections.observableList(messageDataList);
+    	tableView_Messages.setItems(data);
+    	
+    	tableView_Messages.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+    	    if (newSelection != null) {
+        		Message message = tableView_Messages.getSelectionModel().getSelectedItem().getMessage();
+	    		textArea_MessageDetails.setText(message.toString());
+    	    }
+    	});
+    	
+    	if (tableView_Messages.getItems().size() > 0) {    	
+    		tableView_Messages.getSelectionModel().selectFirst();
+    	}
     }
 }
