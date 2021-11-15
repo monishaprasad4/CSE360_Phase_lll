@@ -50,7 +50,7 @@ public class Appointment {
 	}
 
 	public String getReason() {
-		return reason;
+		return (reason == null || reason.length() == 0) ? "<Unspecified reason>" : reason;
 	}
 
 	public void setReason(String reason) {
