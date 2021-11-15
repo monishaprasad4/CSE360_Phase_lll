@@ -1,5 +1,7 @@
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -144,8 +146,13 @@ public class ui_Patient_VisitHistoryController {
     	// create an observable list with date only as string
     	ArrayList<String> appointmentDates = new ArrayList<String>();
     	for (int i = 0; i < appointments.size(); i++) {
+    		
     		// appointmentDates.add(appointments.get(i).getApptDate_String_Date());
-    		appointmentDates.add(appointments.get(i).getApptDate().toString());
+    		Date date = appointments.get(i).getApptDate();
+    		
+    		String formattedDate = new SimpleDateFormat("EEE, dd/MM/yyyy  h:mm aa").format(date);
+    		//appointmentDates.add(appointments.get(i).getApptDate().toString());
+    		appointmentDates.add(formattedDate);
 		}
     	
     	apptsListView.setItems(FXCollections.observableArrayList(appointmentDates));
