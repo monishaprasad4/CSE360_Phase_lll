@@ -1,4 +1,5 @@
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,6 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TableColumn;
@@ -44,9 +46,11 @@ public class ui_Nurse_PatientsController {
 	@FXML private TableColumn<PatientDataView, String> lastVisitColumn;
 	@FXML private TableColumn<PatientDataView, String> nextVisitColumn;
 	@FXML private TextArea patientDetails;
+	@FXML private ListView listView_VisitHistory;
 	
 	private ITService currentITService;
 	private User currentUser;
+	private ArrayList<Appointment> appointments;
 		
     @FXML
     private ResourceBundle resources;
@@ -136,6 +140,23 @@ public class ui_Nurse_PatientsController {
     	    if (newSelection != null) {
         		Patient patient = tableView_Patients.getSelectionModel().getSelectedItem().getPatient();
 	    		patientDetails.setText(patient.toString());
+	    		
+	        	appointments = currentITService.getAppointmentsForUser(patient);
+	        	
+	        	listView_VisitHistory.getItems().clear();
+	        	
+	        	// create an observable list with date only as string
+	        	ArrayList<String> appointmentDates = new ArrayList<String>();
+	        	for (int i = 0; i < appointments.size(); i++) {
+	        		
+	        		// appointmentDates.add(appointments.get(i).getApptDate_String_Date());
+	        		Date date = appointments.get(i).getApptDate();
+	        		
+	        		String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
+	        		//appointmentDates.add(appointments.get(i).getApptDate().toString());
+	        		appointmentDates.add(formattedDate + "\t" + appointments.get(i).getReason());
+	    		}
+	        	listView_VisitHistory.setItems(FXCollections.observableArrayList(appointmentDates));
     	    }
     	});
     	
