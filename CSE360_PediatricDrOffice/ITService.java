@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Scanner;
-import java.io.File;  
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,25 +18,27 @@ public class ITService {
 	private ArrayList<Message> messages;
 	private ArrayList<Appointment> appointments;
 	String systemDataFileName = "systemdata.txt";
-	
+
 	public ITService() {
-		// default constructor 
+		// default constructor
 		this.users = new ArrayList<User>();
 		this.messages = new ArrayList<Message>();
 		this.appointments = new ArrayList<Appointment>();
 	}
-	
+
 	void readFromFile() {
 		System.out.println("Reading from File");
-		try { 
+		try {
 			File myObj = new File(systemDataFileName);
 			Scanner myReader = new Scanner(myObj);
 			// read users
-			Patient tempPatient; Nurse tempNurse; Doctor tempDoctor;
+			Patient tempPatient;
+			Nurse tempNurse;
+			Doctor tempDoctor;
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			while (myReader.hasNextLine()) {
 				String data = myReader.nextLine();
-				
+
 				if (data.equalsIgnoreCase("*NewUser")) {
 					// new user, read next line to determine User Type
 					data = myReader.nextLine();
@@ -48,13 +50,14 @@ public class ITService {
 						tempPatient.setLastName(myReader.nextLine());
 						tempPatient.setPhoneNumber(myReader.nextLine());
 						tempPatient.setDOB(LocalDate.parse(myReader.nextLine(), formatter));
-						tempPatient.setEmail(myReader.nextLine());						
+						tempPatient.setEmail(myReader.nextLine());
 						tempPatient.setCredentials(myReader.nextLine(), myReader.nextLine());
-						tempPatient.setKnownAllergies(myReader.nextLine());						
-						tempPatient.setPreviousHealthIssues(myReader.nextLine());						
-						tempPatient.setImmunizationHistory(myReader.nextLine());						
-						tempPatient.changeDoctorUniqueID(myReader.nextLine());	
-						tempPatient.setPharmacy(myReader.nextLine(), myReader.nextLine(), myReader.nextLine(), myReader.nextLine(), Integer.parseInt(myReader.nextLine()));
+						tempPatient.setKnownAllergies(myReader.nextLine());
+						tempPatient.setPreviousHealthIssues(myReader.nextLine());
+						tempPatient.setImmunizationHistory(myReader.nextLine());
+						tempPatient.changeDoctorUniqueID(myReader.nextLine());
+						tempPatient.setPharmacy(myReader.nextLine(), myReader.nextLine(), myReader.nextLine(),
+								myReader.nextLine(), Integer.parseInt(myReader.nextLine()));
 						tempPatient.setInsurance(myReader.nextLine(), myReader.nextLine(), myReader.nextLine());
 						users.add(tempPatient);
 					} else if (data.equalsIgnoreCase("NURSE")) {
@@ -65,7 +68,7 @@ public class ITService {
 						tempNurse.setLastName(myReader.nextLine());
 						tempNurse.setPhoneNumber(myReader.nextLine());
 						tempNurse.setDOB(LocalDate.parse(myReader.nextLine(), formatter));
-						tempNurse.setEmail(myReader.nextLine());			
+						tempNurse.setEmail(myReader.nextLine());
 						tempNurse.setCredentials(myReader.nextLine(), myReader.nextLine());
 						users.add(tempNurse);
 					} else if (data.equalsIgnoreCase("DOCTOR")) {
@@ -76,7 +79,7 @@ public class ITService {
 						tempDoctor.setLastName(myReader.nextLine());
 						tempDoctor.setPhoneNumber(myReader.nextLine());
 						tempDoctor.setDOB(LocalDate.parse(myReader.nextLine(), formatter));
-						tempDoctor.setEmail(myReader.nextLine());			
+						tempDoctor.setEmail(myReader.nextLine());
 						tempDoctor.setCredentials(myReader.nextLine(), myReader.nextLine());
 						tempDoctor.setSpecialty(myReader.nextLine());
 						users.add(tempDoctor);
@@ -87,14 +90,14 @@ public class ITService {
 					break;
 				}
 			}
-			
+
 			// read messages
 			Message tempMessage;
 			while (myReader.hasNextLine()) {
 				String data = myReader.nextLine();
-				
+
 				if (data.equalsIgnoreCase("*NewMessage")) {
-					// new appointment, read details 
+					// new appointment, read details
 					System.out.println("Reading New Message");
 					tempMessage = new Message();
 					tempMessage.setSenderUniqueID(myReader.nextLine());
@@ -104,13 +107,14 @@ public class ITService {
 						tempMessage.setRecipient(UserType.NURSE);
 					} else if (data.equalsIgnoreCase("DOCTOR")) {
 						tempMessage.setRecipient(UserType.DOCTOR);
-					}					
+					}
 					tempMessage.setSubject(myReader.nextLine());
 					tempMessage.setBody(myReader.nextLine());
 					tempMessage.setReply(myReader.nextLine());
 					tempMessage.setSentDate_String(myReader.nextLine());
-					tempMessage.setReplyDate_String(myReader.nextLine());	
-					tempMessage.setMessageUniqueID(tempMessage.getSenderUniqueID() + " " + tempMessage.getReceiverUniqueID() + " " + tempMessage.getSentDate_String());
+					tempMessage.setReplyDate_String(myReader.nextLine());
+					tempMessage.setMessageUniqueID(tempMessage.getSenderUniqueID() + " "
+							+ tempMessage.getReceiverUniqueID() + " " + tempMessage.getSentDate_String());
 					messages.add(tempMessage);
 				} else if (data.equalsIgnoreCase("*Appointments")) {
 					break;
@@ -118,15 +122,17 @@ public class ITService {
 					break;
 				}
 			}
-			
+
 			// read appointments
-			Appointment tempAppointment; VisitDetails tempVisitDetails; Vitals tempVitals;
+			Appointment tempAppointment;
+			VisitDetails tempVisitDetails;
+			Vitals tempVitals;
 			String intData;
 			while (myReader.hasNextLine()) {
 				String data = myReader.nextLine();
-				
+
 				if (data.equalsIgnoreCase("*NewAppointment")) {
-					// new appointment, read details 
+					// new appointment, read details
 					System.out.println("Reading New Appointment");
 					tempAppointment = new Appointment();
 					tempVisitDetails = new VisitDetails();
@@ -168,7 +174,7 @@ public class ITService {
 					break;
 				}
 			}
-			
+
 			myReader.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("An error occurred.");
@@ -176,24 +182,24 @@ public class ITService {
 		}
 		System.out.println("Completed reading from File");
 	}
-	
+
 	void printToFile() {
 		System.out.println("Printing to File");
 		try {
 			FileWriter myWriter = new FileWriter(systemDataFileName);
-			
+
 			// print all users
 			myWriter.write("*Users\n");
-			for (int i = 0; i < users.size(); i++) { 		      
-				myWriter.write("*NewUser\n"); 
+			for (int i = 0; i < users.size(); i++) {
+				myWriter.write("*NewUser\n");
 				if (users.get(i).getUserType() == UserType.PATIENT) {
-					myWriter.write("PATIENT\n"); 
+					myWriter.write("PATIENT\n");
 				} else if (users.get(i).getUserType() == UserType.NURSE) {
-					myWriter.write("NURSE\n"); 
+					myWriter.write("NURSE\n");
 				} else if (users.get(i).getUserType() == UserType.DOCTOR) {
-					myWriter.write("DOCTOR\n"); 
-				} 
-				myWriter.write(users.get(i).getFirstName() + "\n"); 
+					myWriter.write("DOCTOR\n");
+				}
+				myWriter.write(users.get(i).getFirstName() + "\n");
 				myWriter.write(users.get(i).getLastName() + "\n");
 				myWriter.write(users.get(i).getPhoneNumber() + "\n");
 				myWriter.write(users.get(i).getDOB() + "\n");
@@ -201,121 +207,124 @@ public class ITService {
 				myWriter.write(users.get(i).getUniqueID() + "\n");
 				myWriter.write(users.get(i).getPassword() + "\n");
 				if (users.get(i).getUserType() == UserType.PATIENT) {
-					myWriter.write(((Patient)users.get(i)).getKnownAllergies() + "\n"); 
-					myWriter.write(((Patient)users.get(i)).getPreviousHealthIssues() + "\n"); 
-					myWriter.write(((Patient)users.get(i)).getImmunizationHistory() + "\n"); 
-					myWriter.write(((Patient)users.get(i)).getDoctorUniqueID() + "\n"); 
-					myWriter.write(((Patient)users.get(i)).getPharmacy().getName() + "\n"); 
-					myWriter.write(((Patient)users.get(i)).getPharmacy().getStreetAddress() + "\n");
-					myWriter.write(((Patient)users.get(i)).getPharmacy().getCity() + "\n");
-					myWriter.write(((Patient)users.get(i)).getPharmacy().getState() + "\n");
-					myWriter.write(((Patient)users.get(i)).getPharmacy().getZip() + "\n");
-					myWriter.write(((Patient)users.get(i)).getInsurance().getName() + "\n");
-					myWriter.write(((Patient)users.get(i)).getInsurance().getInsurancePolicyId() + "\n");
-					myWriter.write(((Patient)users.get(i)).getInsurance().getPhoneNumber() + "\n");
+					myWriter.write(((Patient) users.get(i)).getKnownAllergies() + "\n");
+					myWriter.write(((Patient) users.get(i)).getPreviousHealthIssues() + "\n");
+					myWriter.write(((Patient) users.get(i)).getImmunizationHistory() + "\n");
+					myWriter.write(((Patient) users.get(i)).getDoctorUniqueID() + "\n");
+					myWriter.write(((Patient) users.get(i)).getPharmacy().getName() + "\n");
+					myWriter.write(((Patient) users.get(i)).getPharmacy().getStreetAddress() + "\n");
+					myWriter.write(((Patient) users.get(i)).getPharmacy().getCity() + "\n");
+					myWriter.write(((Patient) users.get(i)).getPharmacy().getState() + "\n");
+					myWriter.write(((Patient) users.get(i)).getPharmacy().getZip() + "\n");
+					myWriter.write(((Patient) users.get(i)).getInsurance().getName() + "\n");
+					myWriter.write(((Patient) users.get(i)).getInsurance().getInsurancePolicyId() + "\n");
+					myWriter.write(((Patient) users.get(i)).getInsurance().getPhoneNumber() + "\n");
 				} else if (users.get(i).getUserType() == UserType.NURSE) {
 					// no additional fields
 				} else if (users.get(i).getUserType() == UserType.DOCTOR) {
-					myWriter.write(((Doctor)users.get(i)).getSpecialty() + "\n"); 
-				} 				
-			}  
-			
-			// print all messages
-			myWriter.write("*Messages\n");
-			for (int i = 0; i < messages.size(); i++) { 		      
-				myWriter.write("*NewMessage\n"); 				
-				myWriter.write(messages.get(i).getSenderUniqueID() + "\n"); 	
-				myWriter.write(messages.get(i).getReceiverUniqueID() + "\n"); 
-				if (messages.get(i).getRecipient() == UserType.NURSE) {
-					myWriter.write("NURSE\n"); 
-				} else if (messages.get(i).getRecipient() == UserType.DOCTOR) {
-					myWriter.write("DOCTOR\n"); 
-				} 
-				myWriter.write(messages.get(i).getSubject() + "\n"); 	
-				myWriter.write(messages.get(i).getBody() + "\n"); 	
-				if (messages.get(i).getReply() == null) {
-					myWriter.write("null" + "\n");
-				} else {
-					myWriter.write(messages.get(i).getReply() + "\n"); 	
-				}
-				myWriter.write(messages.get(i).getSentDate_String() + "\n"); 	
-				if (messages.get(i).getReply() == null) {
-					myWriter.write("null" + "\n");
-				} else {
-					myWriter.write(messages.get(i).getReplyDate_String() + "\n"); 
+					myWriter.write(((Doctor) users.get(i)).getSpecialty() + "\n");
 				}
 			}
-			
+
+			// print all messages
+			myWriter.write("*Messages\n");
+			for (int i = 0; i < messages.size(); i++) {
+				myWriter.write("*NewMessage\n");
+				myWriter.write(messages.get(i).getSenderUniqueID() + "\n");
+				myWriter.write(messages.get(i).getReceiverUniqueID() + "\n");
+				if (messages.get(i).getRecipient() == UserType.NURSE) {
+					myWriter.write("NURSE\n");
+				} else if (messages.get(i).getRecipient() == UserType.DOCTOR) {
+					myWriter.write("DOCTOR\n");
+				}
+				myWriter.write(messages.get(i).getSubject() + "\n");
+				myWriter.write(messages.get(i).getBody() + "\n");
+				if (messages.get(i).getReply() == null) {
+					myWriter.write("null" + "\n");
+				} else {
+					myWriter.write(messages.get(i).getReply() + "\n");
+				}
+				myWriter.write(messages.get(i).getSentDate_String() + "\n");
+				if (messages.get(i).getReply() == null) {
+					myWriter.write("null" + "\n");
+				} else {
+					myWriter.write(messages.get(i).getReplyDate_String() + "\n");
+				}
+			}
+
 			// print all appointments
 			myWriter.write("*Appointments\n");
-			VisitDetails visitDetails; Vitals vitals;
-			for (int i = 0; i < appointments.size(); i++) { 		      
-				myWriter.write("*NewAppointment\n"); 				
-				myWriter.write(appointments.get(i).getUniqueID() + "\n"); 	
-				myWriter.write(appointments.get(i).getPatientUniqueID() + "\n"); 	
-				myWriter.write(appointments.get(i).getDoctorUniqueID() + "\n"); 	
-				myWriter.write(appointments.get(i).getReason() + "\n"); 	
-				myWriter.write(appointments.get(i).getApptDate_String() + "\n"); 	
+			VisitDetails visitDetails;
+			Vitals vitals;
+			for (int i = 0; i < appointments.size(); i++) {
+				myWriter.write("*NewAppointment\n");
+				myWriter.write(appointments.get(i).getUniqueID() + "\n");
+				myWriter.write(appointments.get(i).getPatientUniqueID() + "\n");
+				myWriter.write(appointments.get(i).getDoctorUniqueID() + "\n");
+				myWriter.write(appointments.get(i).getReason() + "\n");
+				myWriter.write(appointments.get(i).getApptDate_String() + "\n");
 				visitDetails = appointments.get(i).getVisitDetails();
 				if (visitDetails == null) {
-					myWriter.write("null" + "\n"); 	
-					myWriter.write("null" + "\n"); 	
-					myWriter.write("null" + "\n"); 	
-					myWriter.write("null" + "\n"); 	
-					myWriter.write("null" + "\n"); 	
-					myWriter.write("null" + "\n"); 	
-					myWriter.write("null" + "\n"); 	
-					myWriter.write("null" + "\n"); 
+					myWriter.write("null" + "\n");
+					myWriter.write("null" + "\n");
+					myWriter.write("null" + "\n");
+					myWriter.write("null" + "\n");
+					myWriter.write("null" + "\n");
+					myWriter.write("null" + "\n");
+					myWriter.write("null" + "\n");
+					myWriter.write("null" + "\n");
 				} else {
-					myWriter.write(visitDetails.getHealthConcerns() + "\n"); 	
-					myWriter.write(visitDetails.getPhysicalHealthFindings() + "\n"); 	
-					myWriter.write(visitDetails.getPrescriptions() + "\n"); 	
+					myWriter.write(visitDetails.getHealthConcerns() + "\n");
+					myWriter.write(visitDetails.getPhysicalHealthFindings() + "\n");
+					myWriter.write(visitDetails.getPrescriptions() + "\n");
 					vitals = visitDetails.getVitals();
-					myWriter.write(vitals.getBPDiastolic() + "\n"); 	
-					myWriter.write(vitals.getBPSystolic() + "\n"); 	
-					myWriter.write(vitals.getHeight() + "\n"); 	
-					myWriter.write(vitals.getTemperature() + "\n"); 	
-					myWriter.write(vitals.getWeight() + "\n"); 
+					myWriter.write(vitals.getBPDiastolic() + "\n");
+					myWriter.write(vitals.getBPSystolic() + "\n");
+					myWriter.write(vitals.getHeight() + "\n");
+					myWriter.write(vitals.getTemperature() + "\n");
+					myWriter.write(vitals.getWeight() + "\n");
 				}
-			}  
-			
+			}
+
 			myWriter.close();
 			System.out.println("File closed, print complete");
 		} catch (IOException e) {
 			System.out.println("An error occurred.");
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	private int getMessageIndex(String uniqueID) {
 		System.out.println("ITService - getMessageIndex - input Message UID: " + uniqueID);
-		
+
 		// loop thro' all messages to check for match on unique ID
 		for (int i = 0; i < messages.size(); i++) {
-			System.out.println("ITService - getMessageIndex - index = " + i + " , UID = " + messages.get(i).getMessageUniqueID());			
+			System.out.println(
+					"ITService - getMessageIndex - index = " + i + " , UID = " + messages.get(i).getMessageUniqueID());
 			if (messages.get(i).getMessageUniqueID().equalsIgnoreCase(uniqueID)) {
 				// message found, return index
 				return i;
 			}
 		}
-		
+
 		// user not found
 		return -1;
 	}
-	
+
 	private int getAppointmentIndex(String uniqueID) {
 		System.out.println("ITService - getAppointmentIndex - input Appt UID: " + uniqueID);
-		
+
 		// loop thro' all appointments to check for match on unique ID
 		for (int i = 0; i < appointments.size(); i++) {
-			System.out.println("ITService - getAppointmentIndex - index = " + i + " , UID = " + appointments.get(i).getUniqueID());			
+			System.out.println(
+					"ITService - getAppointmentIndex - index = " + i + " , UID = " + appointments.get(i).getUniqueID());
 			if (appointments.get(i).getUniqueID().equalsIgnoreCase(uniqueID)) {
 				// appointment found, return index
 				return i;
 			}
 		}
-		
+
 		// user not found
 		return -1;
 	}
@@ -328,7 +337,7 @@ public class ITService {
 				return i;
 			}
 		}
-		
+
 		// user not found
 		return -1;
 	}
@@ -339,12 +348,12 @@ public class ITService {
 			// user already exists
 			return false;
 		}
-		
+
 		// user does not already exist, add now and return true
 		users.add(user);
 		return true;
 	}
-	
+
 	public String getUserFullNameFromUniqueID(String uniqueID) {
 		int i = getUserIndex(uniqueID);
 		if (i == -1) {
@@ -355,16 +364,27 @@ public class ITService {
 		}
 	}
 	
+	public User getUserFromUniqueID(String uniqueID) {
+		int i = getUserIndex(uniqueID);
+		if (i == -1) {
+			// can't find user
+			return null;
+		} else {
+			return users.get(i);
+		}
+	}
+
+
 	public String getDoctorSpecialtyFromUniqueID(String uniqueID) {
 		int i = getUserIndex(uniqueID);
 		if (i == -1) {
 			// can't find user
 			return null;
 		} else {
-			return ((Doctor)users.get(i)).getSpecialty();
+			return ((Doctor) users.get(i)).getSpecialty();
 		}
-	}	
-	
+	}
+
 	public User signIn(Credentials credentials) {
 		int i = getUserIndex(credentials.getUniqueID());
 		if (i == -1) {
@@ -378,7 +398,7 @@ public class ITService {
 			}
 		}
 	}
-	
+
 	public Appointment checkForUpcomingAppt(String userUniqueID) {
 		int i = getUserIndex(userUniqueID);
 		if (i == -1) {
@@ -387,7 +407,7 @@ public class ITService {
 		} else {
 			// loop thro' all appointments for user, check if any are in the future
 			ArrayList<Appointment> userAppointments = getAppointmentsForUser(users.get(i));
-			
+
 			if (userAppointments == null) {
 				return null;
 			} else {
@@ -399,35 +419,38 @@ public class ITService {
 				}
 			}
 		}
-		
+
 		return null;
 	}
-	
-	 
-	
+
 	public ArrayList<String> getDoctorsForListView(ArrayList<User> doctors) {
 		ArrayList<String> doctorsForListView = new ArrayList<String>();
-		
-		// loop thro' all doctors in list, add first name, last name, and specialty to array list
+
+		// loop thro' all doctors in list, add first name, last name, and specialty to
+		// array list
 		for (int i = 0; i < doctors.size(); i++) {
-			// doctorsForListView.add(doctors.get(i).getFirstName() + " " + doctors.get(i).getLastName() + " (" + ((Doctor)doctors.get(i)).getSpecialty() + ")");
+			// doctorsForListView.add(doctors.get(i).getFirstName() + " " +
+			// doctors.get(i).getLastName() + " (" + ((Doctor)doctors.get(i)).getSpecialty()
+			// + ")");
 			doctorsForListView.add(doctors.get(i).toString());
 		}
-		
+
 		return doctorsForListView;
 	}
-	
+
 	public void changeDoctor(String userUniqueID, String newDoctorUniqueID) {
 		int i = getUserIndex(userUniqueID);
 		if (i == -1) {
 			// can't find user
 		} else {
-			((Patient)users.get(i)).changeDoctorUniqueID(newDoctorUniqueID);
+			((Patient) users.get(i)).changeDoctorUniqueID(newDoctorUniqueID);
 		}
 	}
-	
-	public void updateUserInfo(String originalUniqueID, String firstName, String lastName, LocalDate birthday, String uniqueID, String phoneNumber, String email) {
-		// use originalUniqueID in case any of the first name, last name, or birthdate were changed
+
+	public void updateUserInfo(String originalUniqueID, String firstName, String lastName, LocalDate birthday,
+			String uniqueID, String phoneNumber, String email) {
+		// use originalUniqueID in case any of the first name, last name, or birthdate
+		// were changed
 		int i = getUserIndex(originalUniqueID);
 		if (i == -1) {
 			// can't find user
@@ -440,8 +463,9 @@ public class ITService {
 			users.get(i).setEmail(email);
 			users.get(i).setUniqueID(uniqueID);
 		}
-		
-		// check if Unique ID was updated, if so, need to propagate that change throughout the database
+
+		// check if Unique ID was updated, if so, need to propagate that change
+		// throughout the database
 		if (originalUniqueID.equals(uniqueID)) {
 			// unique ID not updated, do nothing
 		} else {
@@ -449,7 +473,7 @@ public class ITService {
 			System.out.println("Original Unique ID: " + originalUniqueID);
 			System.out.println("Updated  Unique ID: " + uniqueID);
 			System.out.println("ITService - updateUserInfo - updating the database with new unique ID");
-			
+
 			// update appointments
 			for (i = 0; i < appointments.size(); i++) {
 				if (appointments.get(i).getDoctorUniqueID().equals(originalUniqueID)) {
@@ -460,7 +484,7 @@ public class ITService {
 					appointments.get(i).setPatientUniqueID(uniqueID);
 				}
 			}
-			
+
 			// update messages
 			for (i = 0; i < messages.size(); i++) {
 				if (messages.get(i).getReceiverUniqueID().equals(originalUniqueID)) {
@@ -473,29 +497,34 @@ public class ITService {
 			}
 		}
 	}
-	
-	public void updatePharmacyInfo(String originalUniqueID, String pharmacyName, String pharmacyStreetAddress, String pharmacyCity, String pharmacyState, int pharmacyZip) {
-		// use originalUniqueID in case any of the first name, last name, or birthdate were changed
+
+	public void updatePharmacyInfo(String originalUniqueID, String pharmacyName, String pharmacyStreetAddress,
+			String pharmacyCity, String pharmacyState, int pharmacyZip) {
+		// use originalUniqueID in case any of the first name, last name, or birthdate
+		// were changed
 		int i = getUserIndex(originalUniqueID);
 		if (i == -1) {
 			// can't find user
 		} else {
 			// found user, update info
-			((Patient)users.get(i)).setPharmacy(pharmacyName, pharmacyStreetAddress, pharmacyCity, pharmacyState, pharmacyZip);
+			((Patient) users.get(i)).setPharmacy(pharmacyName, pharmacyStreetAddress, pharmacyCity, pharmacyState,
+					pharmacyZip);
 		}
 	}
-	
-	public void updateInsuranceInfo(String originalUniqueID, String insuranceCompanyName, String insurancePolicyID, String insurancePhoneNumber) {
-		// use originalUniqueID in case any of the first name, last name, or birthdate were changed
+
+	public void updateInsuranceInfo(String originalUniqueID, String insuranceCompanyName, String insurancePolicyID,
+			String insurancePhoneNumber) {
+		// use originalUniqueID in case any of the first name, last name, or birthdate
+		// were changed
 		int i = getUserIndex(originalUniqueID);
 		if (i == -1) {
 			// can't find user
 		} else {
 			// found user, update info
-			((Patient)users.get(i)).setInsurance(insuranceCompanyName, insurancePolicyID, insurancePhoneNumber);
+			((Patient) users.get(i)).setInsurance(insuranceCompanyName, insurancePolicyID, insurancePhoneNumber);
 		}
 	}
-	
+
 	public ArrayList<User> getDoctors() {
 		ArrayList<User> userList = new ArrayList<User>();
 
@@ -506,9 +535,9 @@ public class ITService {
 				userList.add(users.get(i));
 			}
 		}
-		
+
 		Sorts.sortUsers(userList, new UserComparator());
-		
+
 		return userList;
 	}
 
@@ -522,9 +551,9 @@ public class ITService {
 				userList.add(users.get(i));
 			}
 		}
-		
+
 		Sorts.sortUsers(userList, new UserComparator());
-		
+
 		return userList;
 	}
 
@@ -538,12 +567,29 @@ public class ITService {
 				userList.add(users.get(i));
 			}
 		}
-		
+
 		Sorts.sortUsers(userList, new UserComparator());
-		
+
 		return userList;
 	}
-	
+
+	public ArrayList<String> getPatientsForListView(ArrayList<User> patients) {
+		ArrayList<String> patientsForListView = new ArrayList<String>();
+
+		// loop thro' all patients in list, add first name, last name, and DOB to array
+		// list
+		for (int i = 0; i < patients.size(); i++) {
+			patientsForListView.add(patients.get(i).getFirstName() + " " + patients.get(i).getLastName());
+									/*+ ", " + 
+									patients.get(i).getDOB().getMonthValue() + "/" +  
+		 							patients.get(i).getDOB().getDayOfMonth() + "/" +
+		 							patients.get(i).getDOB().getYear());
+		 							*/
+		}
+
+		return patientsForListView;
+	}
+
 	public ArrayList<User> getPatientsForDoctor(String doctorId) {
 		ArrayList<User> userList = new ArrayList<User>();
 
@@ -551,26 +597,24 @@ public class ITService {
 		for (int i = 0; i < users.size(); i++) {
 			if (users.get(i).getUserType() == UserType.PATIENT) {
 				Patient patient = (Patient) users.get(i);
-				if (Objects.equals(patient.getDoctorUniqueID(), doctorId))
-				{				
+				if (Objects.equals(patient.getDoctorUniqueID(), doctorId)) {
 					// patient, add to array list
 					userList.add(users.get(i));
 				}
 			}
 		}
-		
+
 		Sorts.sortUsers(userList, new UserComparator());
-		
+
 		return userList;
 	}
-
 
 	public void newMessage(Message message) {
 		messages.add(message);
 	}
 
 	public Boolean deleteMessage(String messageUniqueID) {
-		System.out.println("ITService - Delete Message - input Message UID: " + messageUniqueID); 
+		System.out.println("ITService - Delete Message - input Message UID: " + messageUniqueID);
 		int i = getMessageIndex(messageUniqueID);
 		if (i == -1) {
 			// can't find message
@@ -580,11 +624,10 @@ public class ITService {
 			messages.remove(i);
 			return true;
 		}
-		
+
 	}
-	
-	public ArrayList<Message> getMessages() 
-	{
+
+	public ArrayList<Message> getMessages() {
 		return messages;
 	}
 
@@ -597,11 +640,11 @@ public class ITService {
 			return getAppointmentsForUser(users.get(i));
 		}
 	}
-	
+
 	public ArrayList<Message> getMessagesForUser(User inputUser) {
 		ArrayList<Message> messagesForUser = new ArrayList<Message>();
 		Boolean addMsg;
-		
+
 		// loop thro' all messages check for match on unique ID
 		for (int i = 0; i < messages.size(); i++) {
 			addMsg = false;
@@ -611,7 +654,8 @@ public class ITService {
 					addMsg = true;
 				}
 			} else if (inputUser.getUserType() == UserType.DOCTOR) {
-				// return messages that match recipient for this Doctor (user) if the recipient user type is Doctor
+				// return messages that match recipient for this Doctor (user) if the recipient
+				// user type is Doctor
 				if (messages.get(i).getRecipient() == UserType.DOCTOR) {
 					if (messages.get(i).getReceiverUniqueID().equalsIgnoreCase(inputUser.getUniqueID())) {
 						addMsg = true;
@@ -623,22 +667,22 @@ public class ITService {
 					addMsg = true;
 				}
 			}
-			
+
 			if (addMsg) {
 				messagesForUser.add(messages.get(i));
 			}
 		}
-		
+
 		// sort by/order by date, descending
 		Sorts.sortMessages(messagesForUser, new MessageComparator());
-		
+
 		return messagesForUser;
 	}
-	
+
 	public ArrayList<Appointment> getAppointmentsForUser(User inputUser) {
 		ArrayList<Appointment> appointmentsForUser = new ArrayList<Appointment>();
 		Boolean addAppt;
-		
+
 		// loop thro' all appointments check for match on unique ID
 		for (int i = 0; i < appointments.size(); i++) {
 			addAppt = false;
@@ -656,26 +700,26 @@ public class ITService {
 				// return all appointments for nurses
 				addAppt = true;
 			}
-			
+
 			if (addAppt) {
 				appointmentsForUser.add(appointments.get(i));
 			}
 		}
-		
+
 		// sort by/order by date, descending
 		Sorts.sortAppointments(appointmentsForUser, new AppointmentComparator());
-		
+
 		return appointmentsForUser;
 	}
 
 	public boolean scheduleAppointment(Appointment appointment) {
 		appointments.add(appointment);
-		
+
 		return true;
 	}
 
 	public boolean cancelAppointment(Appointment appointment) {
-		System.out.println("ITService - Cancel Appointment - input Appt UID: " + appointment.getUniqueID()); 
+		System.out.println("ITService - Cancel Appointment - input Appt UID: " + appointment.getUniqueID());
 		int i = getAppointmentIndex(appointment.getUniqueID());
 		if (i == -1) {
 			// can't find appointment
@@ -686,10 +730,10 @@ public class ITService {
 			return true;
 		}
 	}
-	
+
 	private Boolean checkForAppointmentsOnDate(String doctorUniqueID, Date date) {
 		ArrayList<Appointment> appointmentsForUser = getAppointmentsForUser(doctorUniqueID);
-		
+
 		if (appointmentsForUser == null) {
 			// no appointments found, none on this date
 			return true;
@@ -701,23 +745,24 @@ public class ITService {
 				}
 			}
 		}
-		
+
 		return true;
 	}
-	
+
 	private static boolean isSameDay(Date date1, Date date2) {
-	    SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
-	    return fmt.format(date1).equals(fmt.format(date2));
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+		return fmt.format(date1).equals(fmt.format(date2));
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	public ArrayList<String> getUpcomingAvailableAppointmentsForDoctor(String doctorUniqueID) {
-		System.out.println("ITService - getUpcomingAvailableAppointmentsForDoctor - input Doctor UID: " + doctorUniqueID); 
-		
+		System.out
+				.println("ITService - getUpcomingAvailableAppointmentsForDoctor - input Doctor UID: " + doctorUniqueID);
+
 		ArrayList<String> upcomingAvailableAppointmentsForDoctor = new ArrayList<String>();
-		
+
 		// assumption - only 1 appointment can be scheduled per day for a doctor
-		
+
 		// display hours 9:00 - 15:00 for possible selections
 		// on days where the doctor does not already
 		// have an appointment in the next 3 weeks
@@ -726,49 +771,54 @@ public class ITService {
 		Calendar start = Calendar.getInstance();
 		start.setTime(startDate);
 		Calendar cal = Calendar.getInstance();
-        int count = 0; int hour; int day;
+		int count = 0;
+		int hour;
+		int day;
 		Date date = start.getTime();
 		while (count < 21) {
 			count = count + 1;
 			start.add(Calendar.DATE, 1);
 			date = start.getTime();
-			// System.out.println("ITService - getUpcomingAvailableAppointmentsForDoctor - date: " + date.toString());
-		    
-			// check to see if this day should be included 
+			// System.out.println("ITService - getUpcomingAvailableAppointmentsForDoctor -
+			// date: " + date.toString());
+
+			// check to see if this day should be included
 			// do not include days where the doctor has other appointments
 			includeDay = checkForAppointmentsOnDate(doctorUniqueID, date);
-			
+
 			// do not include Saturday and Sunday
-			cal.setTime(date); 
-	        day = cal.get(Calendar.DAY_OF_WEEK);
-	        if (day == Calendar.SATURDAY || day == Calendar.SUNDAY) {
-	        	includeDay = false;
-	        }
-	        
+			cal.setTime(date);
+			day = cal.get(Calendar.DAY_OF_WEEK);
+			if (day == Calendar.SATURDAY || day == Calendar.SUNDAY) {
+				includeDay = false;
+			}
+
 			if (includeDay) {
-			    // loop thro' 9 to 15 hours
-			    hour = 8;
-			    while (hour < 15) {
-			    	hour = hour + 1;
-			    	// System.out.println("ITService - getUpcomingAvailableAppointmentsForDoctor - hour: " + hour);
-			    	date.setHours(hour);
-			    	date.setMinutes(0);
-			    	date.setSeconds(0);
-			    	// System.out.println("ITService - getUpcomingAvailableAppointmentsForDoctor - date: " + date.toString());
-	
-			    	upcomingAvailableAppointmentsForDoctor.add(date.toString());
-			    }
+				// loop thro' 9 to 15 hours
+				hour = 8;
+				while (hour < 15) {
+					hour = hour + 1;
+					// System.out.println("ITService - getUpcomingAvailableAppointmentsForDoctor -
+					// hour: " + hour);
+					date.setHours(hour);
+					date.setMinutes(0);
+					date.setSeconds(0);
+					// System.out.println("ITService - getUpcomingAvailableAppointmentsForDoctor -
+					// date: " + date.toString());
+
+					String formattedDate = new SimpleDateFormat("EEE MM/dd/yyyy, h:mm aa").format(date);
+					upcomingAvailableAppointmentsForDoctor.add(formattedDate);
+				}
 			}
 		}
-		
+
 		return upcomingAvailableAppointmentsForDoctor;
 	}
-	
-	public ArrayList<Appointment> getAppointments()
-	{
+
+	public ArrayList<Appointment> getAppointments() {
 		return appointments;
 	}
-	
+
 	void createDataAndPrintToFile() {
 
 		// ----------------------------------------------------------------
@@ -776,7 +826,7 @@ public class ITService {
 		// users
 		// ----------------------------------------------------------------
 		// ----------------------------------------------------------------
-		
+
 		// ----------------------------------------------------------------
 		// Nurses
 		// ----------------------------------------------------------------
@@ -792,7 +842,7 @@ public class ITService {
 		nurse1Credentials.setPassword("password1");
 		nurse1.setCredentials(nurse1Credentials);
 		users.add(nurse1);
-		
+
 		Nurse nurse2 = new Nurse();
 		nurse2.setUserType(UserType.NURSE);
 		nurse2.setFirstName("Gail");
@@ -805,7 +855,7 @@ public class ITService {
 		nurse2Credentials.setPassword("password2");
 		nurse2.setCredentials(nurse2Credentials);
 		users.add(nurse2);
-		
+
 		Nurse nurse3 = new Nurse();
 		nurse3.setUserType(UserType.NURSE);
 		nurse3.setFirstName("Tara");
@@ -818,7 +868,7 @@ public class ITService {
 		nurse3Credentials.setPassword("password3");
 		nurse3.setCredentials(nurse3Credentials);
 		users.add(nurse3);
-		
+
 		// ----------------------------------------------------------------
 		// Doctors
 		// ----------------------------------------------------------------
@@ -835,7 +885,7 @@ public class ITService {
 		doctor1.setCredentials(doctor1Credentials);
 		doctor1.setSpecialty("Anesthesiology");
 		users.add(doctor1);
-		
+
 		Doctor doctor2 = new Doctor();
 		doctor2.setUserType(UserType.DOCTOR);
 		doctor2.setFirstName("Eloisa");
@@ -876,8 +926,7 @@ public class ITService {
 		doctor4Credentials.setPassword("password7");
 		doctor4.setCredentials(doctor4Credentials);
 		doctor4.setSpecialty("Internal Medicine");
-		users.add(doctor4);		
-		
+		users.add(doctor4);
 
 		// ----------------------------------------------------------------
 		// Patients
@@ -890,7 +939,8 @@ public class ITService {
 		patient1.setDOB(LocalDate.of(1990, 1, 8));
 		patient1.setEmail("bob@fischer.com");
 		Credentials patient1Credentials = new Credentials();
-		patient1Credentials.setUniqueID(patient1.getFirstName() + patient1.getLastName() + patient1.getDOB().toString());
+		patient1Credentials
+				.setUniqueID(patient1.getFirstName() + patient1.getLastName() + patient1.getDOB().toString());
 		patient1Credentials.setPassword("password8");
 		patient1.setCredentials(patient1Credentials);
 		patient1.setKnownAllergies("Peanuts");
@@ -908,7 +958,7 @@ public class ITService {
 		patient1Insurance.setName("Blue Cross Blue Shield");
 		patient1Insurance.setInsurancePolicyId("1234");
 		patient1Insurance.setPhoneNumber("18886302583");
-		patient1.setInsurance(patient1Insurance);		
+		patient1.setInsurance(patient1Insurance);
 		users.add(patient1);
 
 		Patient patient2 = new Patient();
@@ -919,7 +969,8 @@ public class ITService {
 		patient2.setDOB(LocalDate.of(1990, 1, 9));
 		patient2.setEmail("jerry@lewis.com");
 		Credentials patient2Credentials = new Credentials();
-		patient2Credentials.setUniqueID(patient2.getFirstName() + patient2.getLastName() + patient2.getDOB().toString());
+		patient2Credentials
+				.setUniqueID(patient2.getFirstName() + patient2.getLastName() + patient2.getDOB().toString());
 		patient2Credentials.setPassword("password9");
 		patient2.setCredentials(patient2Credentials);
 		patient2.setKnownAllergies("Wheat");
@@ -937,7 +988,7 @@ public class ITService {
 		patient2Insurance.setName("Aetna");
 		patient2Insurance.setInsurancePolicyId("12345");
 		patient2Insurance.setPhoneNumber("18008723862");
-		patient2.setInsurance(patient2Insurance);		
+		patient2.setInsurance(patient2Insurance);
 		users.add(patient2);
 
 		Patient patient3 = new Patient();
@@ -948,7 +999,8 @@ public class ITService {
 		patient3.setDOB(LocalDate.of(1990, 1, 10));
 		patient3.setEmail("carrie@rodriguez.com");
 		Credentials patient3Credentials = new Credentials();
-		patient3Credentials.setUniqueID(patient3.getFirstName() + patient3.getLastName() + patient3.getDOB().toString());
+		patient3Credentials
+				.setUniqueID(patient3.getFirstName() + patient3.getLastName() + patient3.getDOB().toString());
 		patient3Credentials.setPassword("password10");
 		patient3.setCredentials(patient3Credentials);
 		patient3.setKnownAllergies("Eggs");
@@ -966,7 +1018,7 @@ public class ITService {
 		patient3Insurance.setName("Cigna");
 		patient3Insurance.setInsurancePolicyId("123456");
 		patient3Insurance.setPhoneNumber("18009971654");
-		patient3.setInsurance(patient3Insurance);		
+		patient3.setInsurance(patient3Insurance);
 		users.add(patient3);
 
 		Patient patient4 = new Patient();
@@ -977,7 +1029,8 @@ public class ITService {
 		patient4.setDOB(LocalDate.of(1990, 1, 26));
 		patient4.setEmail("alex@winter.com");
 		Credentials patient4Credentials = new Credentials();
-		patient4Credentials.setUniqueID(patient4.getFirstName() + patient4.getLastName() + patient4.getDOB().toString());
+		patient4Credentials
+				.setUniqueID(patient4.getFirstName() + patient4.getLastName() + patient4.getDOB().toString());
 		patient4Credentials.setPassword("password101");
 		patient4.setCredentials(patient4Credentials);
 		patient4.setKnownAllergies("Grass");
@@ -995,9 +1048,9 @@ public class ITService {
 		patient4Insurance.setName("GEICO");
 		patient4Insurance.setInsurancePolicyId("123456789");
 		patient4Insurance.setPhoneNumber("4808278500");
-		patient4.setInsurance(patient4Insurance);		
+		patient4.setInsurance(patient4Insurance);
 		users.add(patient4);
-		
+
 		// ----------------------------------------------------------------
 		// ----------------------------------------------------------------
 		// appointments
@@ -1023,12 +1076,13 @@ public class ITService {
 		vitals1.setHeight(68);
 		vitals1.setTemperature(98);
 		vitals1.setWeight(150);
-		appointment1.setUniqueID(appointment1.getApptDate().toString() + " " + appointment1.getPatientUniqueID() + " " + appointment1.getDoctorUniqueID());
+		appointment1.setUniqueID(appointment1.getApptDate().toString() + " " + appointment1.getPatientUniqueID() + " "
+				+ appointment1.getDoctorUniqueID());
 		visitDetails1.setHealthConcerns(appointment1.getReason());
 		visitDetails1.setVitals(vitals1);
 		appointment1.setVisitDetails(visitDetails1);
 		appointments.add(appointment1);
-		
+
 		Appointment appointment2 = new Appointment();
 		VisitDetails visitDetails2 = new VisitDetails();
 		Vitals vitals2 = new Vitals();
@@ -1048,7 +1102,8 @@ public class ITService {
 		vitals2.setHeight(68);
 		vitals2.setTemperature(99);
 		vitals2.setWeight(152);
-		appointment2.setUniqueID(appointment2.getApptDate().toString() + " " + appointment2.getPatientUniqueID() + " " + appointment2.getDoctorUniqueID());
+		appointment2.setUniqueID(appointment2.getApptDate().toString() + " " + appointment2.getPatientUniqueID() + " "
+				+ appointment2.getDoctorUniqueID());
 		visitDetails2.setHealthConcerns(appointment2.getReason());
 		visitDetails2.setVitals(vitals2);
 		appointment2.setVisitDetails(visitDetails2);
@@ -1073,12 +1128,13 @@ public class ITService {
 		vitals3.setHeight(72);
 		vitals3.setTemperature(100);
 		vitals3.setWeight(165);
-		appointment3.setUniqueID(appointment3.getApptDate().toString() + " " + appointment3.getPatientUniqueID() + " " + appointment3.getDoctorUniqueID());
+		appointment3.setUniqueID(appointment3.getApptDate().toString() + " " + appointment3.getPatientUniqueID() + " "
+				+ appointment3.getDoctorUniqueID());
 		visitDetails3.setHealthConcerns(appointment3.getReason());
 		visitDetails3.setVitals(vitals3);
 		appointment3.setVisitDetails(visitDetails3);
 		appointments.add(appointment3);
-		
+
 		// ----------------------------------------------------------------
 		// ----------------------------------------------------------------
 		// messages
@@ -1103,7 +1159,7 @@ public class ITService {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		messages.add(message1);		
+		messages.add(message1);
 
 		Message message2 = new Message();
 		message2.setSenderUniqueID(patient4.getUniqueID());
@@ -1146,7 +1202,7 @@ public class ITService {
 			e.printStackTrace();
 		}
 		messages.add(message3);
-		
+
 		printToFile();
 	}
 }
