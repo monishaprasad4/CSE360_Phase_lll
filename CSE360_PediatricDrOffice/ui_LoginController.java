@@ -34,7 +34,8 @@ public class ui_LoginController {
 	
 	private ITService currentITService;
 	private User currentUser = null;
-		
+	
+			
     @FXML
     private ResourceBundle resources;
 
@@ -48,6 +49,7 @@ public class ui_LoginController {
     @FXML
     private void initialize() {
     	currentITService = new ITService();
+    	ITService.Instance = currentITService;
     	currentITService.readFromFile();    	
     }   	
     
