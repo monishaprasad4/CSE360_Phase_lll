@@ -52,7 +52,7 @@
                            <children>
                               <TextField id="firstNameTextField" fx:id="firstNameTextField" prefHeight="25.0" prefWidth="164.0" promptText="First Name" />
                               <TextField id="lastNameTextField" fx:id="lastNameTextField" promptText="Last Name" GridPane.columnIndex="1" />
-                              <DatePicker id="birthdayDatePicker" fx:id="birthdayDatePicker" prefHeight="25.0" prefWidth="200.0" promptText="Birthday" GridPane.rowIndex="1" />
+                              <DatePicker id="birthdayDatePicker" fx:id="birthdayDatePicker" prefHeight="25.0" prefWidth="200.0" promptText="Date of Birth" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
                         <Label text="Password">
