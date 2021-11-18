@@ -3,7 +3,7 @@
 NURSE
 Jane
 Doe
-5555555551
+5555555551a
 1990-01-01
 jane@doe.com
 JaneDoe1990-01-01
@@ -199,25 +199,11 @@ Fri Oct 29 15:45:00 MST 2021
 Sun Oct 31 10:45:00 MST 2021
 *Appointments
 *NewAppointment
-Fri Oct 29 08:00:00 MST 2021 AlexanderWinter1990-01-26 JeremyGarfield1990-01-07
-AlexanderWinter1990-01-26
-JeremyGarfield1990-01-07
-Flu like symptoms
-Fri Oct 29 08:00:00 MST 2021
-Flu like symptoms
-Congestion
-Z-pac
-100
-70
-68
-98
-150
-*NewAppointment
-Thu Oct 28 15:00:00 MST 2021 AlexanderWinter1990-01-26 LisaMurray1990-01-06
-AlexanderWinter1990-01-26
+Thu 11/18/2021, 1:00 PM JerryLewis1990-01-09 LisaMurray1990-01-06
+JerryLewis1990-01-09
 LisaMurray1990-01-06
-Leg pain
-Thu Oct 28 15:00:00 MST 2021
+Flu
+Thu 11/18/2021, 1:00 PM
 Leg pain
 Back nerve damage
 None
@@ -226,31 +212,3 @@ None
 68
 99
 152
-*NewAppointment
-Fri Nov 05 15:00:00 MST 2021 JerryLewis1990-01-09 EloisaGermaine1990-01-05
-JerryLewis1990-01-09
-EloisaGermaine1990-01-05
-Sore throat
-Fri Nov 05 15:00:00 MST 2021
-Sore throat
-Flu
-Steroid
-110
-75
-72
-100
-165
-*NewAppointment
-Wed Nov 03 15:00:00 MST 2021 AlexanderWinter1990-01-26 EloisaGermaine1990-01-05
-AlexanderWinter1990-01-26
-EloisaGermaine1990-01-05
-null
-Wed Nov 03 15:00:00 MST 2021
-null
-null
-null
-0
-0
-0
-0
-0
