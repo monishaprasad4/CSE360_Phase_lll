@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -45,7 +47,7 @@ public class ui_Doctor_PatientsController {
 	@FXML private TableColumn<PatientDataView, String> nextVisitColumn;
 	
 	@FXML private TextArea patientDetails;
-	@FXML private ListView listView_VisitHistory;
+	@FXML private ListView<String> listView_VisitHistory;
 	
 	private ITService currentITService; private User currentUser;
 	
@@ -149,12 +151,23 @@ public class ui_Doctor_PatientsController {
 	        		// appointmentDates.add(appointments.get(i).getApptDate_String_Date());
 	        		Date date = appointments.get(i).getApptDate();
 	        		
-	        		String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
+	        		String formattedDate = new SimpleDateFormat("MM/dd/yyyy").format(date);
 	        		//appointmentDates.add(appointments.get(i).getApptDate().toString());
 	        		appointmentDates.add(formattedDate + "\t" + appointments.get(i).getReason());
 	    		}
 	        	listView_VisitHistory.setItems(FXCollections.observableArrayList(appointmentDates));
-	    		
+	        	
+	        	listView_VisitHistory.setOnMouseClicked(new EventHandler<MouseEvent>() {
+	        	    @Override
+	        	    public void handle(MouseEvent click) {
+
+	        	        if (click.getClickCount() == 2) {
+	        	           //Use ListView's getSelected Item
+	        	        	int index = listView_VisitHistory.getSelectionModel().getSelectedIndex();
+	        	        	showVisitDetails(index);                                                    
+	        	        }
+	        	    }
+	        	});
     	    }
     	});
     	
@@ -202,5 +215,35 @@ public class ui_Doctor_PatientsController {
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
         primaryStage.show();
-    }    
+    }
+    
+    private void showVisitDetails(int index)
+    {
+    	Patient patient = tableView_Patients.getSelectionModel().getSelectedItem().getPatient();
+		appointments = currentITService.getAppointmentsForUser(patient);
+		Appointment appointment = appointments.get(index);
+		
+		
+    	FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(ApplicationDriver.class.getResource("ui_Patient_Visit Detail.fxml"));
+        BorderPane borderPane;
+		try {
+			borderPane = loader.<BorderPane>load();
+			
+			ui_Patient_VisitDetailController controller = (ui_Patient_VisitDetailController)loader.getController();
+			
+            controller.initializeController(primaryStage,  appointment, currentITService);
+            
+            Scene scene = new Scene(borderPane);
+            
+            Stage dialog = new Stage();
+            dialog.setScene(scene);
+            dialog.showAndWait();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		    	
+    }
 }
