@@ -134,7 +134,8 @@ public class ui_Patient_VisitDetailController {
 						String.valueOf(vitals.getBPSystolic()) + "/" + String.valueOf(vitals.getBPDiastolic()));
 			}
 			if (patient.getKnownAllergies() != null) {
-				knownAllergiesTextArea.setText(patient.getKnownAllergies());
+				if (!patient.getKnownAllergies().equalsIgnoreCase("null"))
+					knownAllergiesTextArea.setText(patient.getKnownAllergies());
 			}
 			if (appointment.getReason() != null) {
 				generalHealthConcernsTextArea.setText(appointment.getReason());
@@ -149,10 +150,12 @@ public class ui_Patient_VisitDetailController {
 				historyOfImmunizationsTextArea.setText(patient.getImmunizationHistory());
 			}
 			if (visitDetails.getPhysicalHealthFindings() != null) {
-				physicalTestFindingsTextArea.setText(visitDetails.getPhysicalHealthFindings());
+				if (!visitDetails.getPhysicalHealthFindings().equalsIgnoreCase("null"))
+					physicalTestFindingsTextArea.setText(visitDetails.getPhysicalHealthFindings());
 			}
 			if (visitDetails.getPrescriptions() != null) {
-				PrescriptionsTextArea.setText(visitDetails.getPrescriptions());
+				if (!visitDetails.getPrescriptions().equalsIgnoreCase("null"))
+					PrescriptionsTextArea.setText(visitDetails.getPrescriptions());
 			}
 		}
 	}
