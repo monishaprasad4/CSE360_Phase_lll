@@ -91,7 +91,7 @@ Blue Cross Blue Shield
 PATIENT
 Jerry
 Lewis
-5555555559
+408-555-1212
 1990-01-09
 jerry@lewis.com
 JerryLewis1990-01-09
@@ -106,8 +106,8 @@ Tempe
 AZ
 85282
 Aetna
-12345
-18008723862
+3493423403
+1-800-555-1212
 *NewUser
 PATIENT
 Carrie
@@ -169,6 +169,153 @@ null
 JimBaren1977-01-08
 password
 null
+*NewUser
+PATIENT
+Kevin
+Smith
+480-555-1212
+1990-01-10
+kevin.smith@gmail.com
+KevinSmith1990-01-10
+password10
+Dust and pollen
+null
+null
+LisaMurray1990-01-06
+Walgreens
+Baseline Road
+Tempe
+AZ
+85283
+Cigna
+293432934
+503-555-1212
+*NewUser
+PATIENT
+Mary
+Williams
+504-343-2334
+1980-01-14
+mary@gmail.com
+MaryWilliams1980-01-14
+password14
+null
+null
+null
+LisaMurray1990-01-06
+Walgreens
+124 Warner Road
+Tempe
+AZ
+85283
+Cigna
+23423423423
+590-143-1233
+*NewUser
+PATIENT
+Martha
+Jones
+415-443-3434
+1970-03-06
+martha.jones@gmail.com
+MarthaJones1970-03-06
+marthajones
+null
+null
+null
+LisaMurray1990-01-06
+CVS 
+334 Chandler Blvd
+Chandler
+AZ
+86955
+Aetna
+493434349
+534-343-1234
+*NewUser
+PATIENT
+Harry
+Smith
+403-233-2323
+1980-05-06
+harry.smith@gmail.com
+HarrySmith1980-05-06
+harrysmith
+null
+null
+null
+LisaMurray1990-01-06
+Walgreens
+343 Baseline Road
+Tempe
+AZ
+85343
+Aetna
+3343434334
+415-343-1323
+*NewUser
+PATIENT
+Joe
+Miller
+null
+1980-01-04
+null
+JoeMiller1980-01-04
+joemiller
+null
+null
+null
+LisaMurray1990-01-06
+null
+null
+null
+null
+0
+null
+null
+null
+*NewUser
+PATIENT
+Hannah
+Jones
+408-123-1334
+1980-02-03
+hannah@gmail.com
+HannahJones1980-02-03
+hannahjones
+null
+null
+null
+LisaMurray1990-01-06
+Walgreens
+123 Baseline Road
+Tempe
+AZ
+85283
+Cigna
+3943439
+430-559-3434
+*NewUser
+PATIENT
+Andrew
+Collins
+408-555-1212
+1990-01-05
+andrew@gmail.com
+AndrewCollins1990-01-05
+andrew
+null
+null
+null
+LisaMurray1990-01-06
+Walgreens
+545 Baseline
+TEmpe
+AZ
+98264
+Cigna
+3943434
+495-343-3434
 *Messages
 *NewMessage
 CarrieRodriguez1990-01-10
@@ -197,18 +344,124 @@ I forgot to ask about pain in my left arm, should I see a specialist?
 If the pain is severe, you should see a specialist.
 Fri Oct 29 15:45:00 MST 2021
 Sun Oct 31 10:45:00 MST 2021
-*Appointments
-*NewAppointment
-Thu 11/18/2021, 1:00 PM JerryLewis1990-01-09 LisaMurray1990-01-06
+*NewMessage
+JoeMiller1980-01-04
+LisaMurray1990-01-06
+DOCTOR
+Not feeling well
+I'm running a temperature. Can I take Advil?
+null
+Wed Nov 17 20:13:01 MST 2021
+
+*NewMessage
+HannahJones1980-02-03
+LisaMurray1990-01-06
+DOCTOR
+Not feeling well
+Can I take Advil to bring my temperature down? Thanks Hannah
+null
+Wed Nov 17 20:28:58 MST 2021
+
+*NewMessage
+AndrewCollins1990-01-05
+LisaMurray1990-01-06
+DOCTOR
+Not feeling well
+I am running a high fever. Please let me know if I can take Advil
+null
+Wed Nov 17 21:16:25 MST 2021
+
+*NewMessage
 JerryLewis1990-01-09
 LisaMurray1990-01-06
+DOCTOR
+Appointment on 25th
+I'm coming in on the 25th as I am not feeling well
+null
+Wed Nov 17 21:25:09 MST 2021
+
+*Appointments
+*NewAppointment
+Fri 11/5/2021, 3:00 PM JerryLewis1990-01-09 EloisaGermaine1990-01-05
+JerryLewis1990-01-09
+LisaMurray1990-01-06
+Sore throat
+Fri 11/05/2021, 3:00 PM
+Sore throat
 Flu
+Steroid
+110
+75
+72
+100
+165
+*NewAppointment
+Fri 11/19/2021, 11:00 AM KevinSmith1990-01-10 LisaMurray1990-01-06
+KevinSmith1990-01-10
+LisaMurray1990-01-06
+High fever, sore throat
+Fri 11/19/2021, 11:00 AM
+null
+null
+null
+0
+0
+0
+0
+0
+*NewAppointment
+Thu 11/18/2021, 1:00 PM HarrySmith1980-05-06 LisaMurray1990-01-06
+HarrySmith1980-05-06
+LisaMurray1990-01-06
+Stomach ache
 Thu 11/18/2021, 1:00 PM
-Leg pain
-Back nerve damage
-None
-101
-71
-68
-99
-152
+null
+null
+null
+0
+0
+0
+0
+0
+*NewAppointment
+Mon 11/22/2021, 12:00 PM JoeMiller1980-01-04 LisaMurray1990-01-06
+JoeMiller1980-01-04
+LisaMurray1990-01-06
+High fever, headache
+Mon 11/22/2021, 12:00 PM
+null
+null
+null
+0
+0
+0
+0
+0
+*NewAppointment
+Wed 11/24/2021, 11:00 AM AndrewCollins1990-01-05 LisaMurray1990-01-06
+AndrewCollins1990-01-05
+LisaMurray1990-01-06
+Flu, sore throat, body ache
+Wed 11/24/2021, 11:00 AM
+null
+null
+null
+0
+0
+0
+0
+0
+*NewAppointment
+Thu 11/25/2021, 2:00 PM JerryLewis1990-01-09 LisaMurray1990-01-06
+JerryLewis1990-01-09
+LisaMurray1990-01-06
+Not feeling well.
+Thu 11/25/2021, 2:00 PM
+null
+null
+null
+0
+0
+0
+0
+0
