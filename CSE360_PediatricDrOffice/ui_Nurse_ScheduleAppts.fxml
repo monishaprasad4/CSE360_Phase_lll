@@ -51,7 +51,7 @@
                   <VBox prefHeight="318.0" prefWidth="204.0">
                      <children>
                         <Label prefHeight="17.0" prefWidth="204.0" text="Reason" />
-                        <TextArea fx:id="textReason" prefHeight="71.0" prefWidth="204.0" />
+                        <TextArea fx:id="textReason" prefHeight="71.0" prefWidth="204.0" promptText="Reason for the appointment" />
                         <Label prefHeight="17.0" prefWidth="204.0" />
                         <Label prefHeight="0.0" prefWidth="202.0" text="Doctor" />
                         <Label fx:id="labelDoctor" prefHeight="17.0" prefWidth="202.0" />
