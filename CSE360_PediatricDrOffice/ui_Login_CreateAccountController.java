@@ -80,8 +80,8 @@ public class ui_Login_CreateAccountController {
         if (passwordTextField.getText() == null || passwordTextField.getText().trim().isEmpty()) {
         	emptyFieldCheck = true;
         }
-        if (birthdayDatePicker.getValue() == null) {
-        	emptyFieldCheck = true;
+        if (birthdayDatePicker.getEditor().getText() == null || birthdayDatePicker.getEditor().getText().trim().isEmpty()) {
+    		emptyFieldCheck = true;
         }
         if (accountType.getValue() == null) {
         	emptyFieldCheck = true;        	
@@ -92,6 +92,10 @@ public class ui_Login_CreateAccountController {
             // display error message if there are empty fields
         	labelNotification.setText("Please fill out all fields");
         } else {
+        	
+        	birthdayDatePicker.setValue(birthdayDatePicker.getConverter()
+        		    .fromString(birthdayDatePicker.getEditor().getText()));
+        	
             // all fields are input, check login attempt 
         	String firstName = firstNameTextField.getText();
 			String lastName = lastNameTextField.getText();
