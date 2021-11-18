@@ -12,13 +12,16 @@ public class Appointment {
 	private String uniqueID;
 	
 	public String getApptDate_String() {
-		return when.toString();		
+		//return when.toString();		
+		return new SimpleDateFormat("EEE MM/dd/yyyy, h:mm aa").format(when);
 	}
 
 	public void setApptDate_String(String inputApptDate) {
 		if (!inputApptDate.equalsIgnoreCase("null")) {
 			try {
-				this.when = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy").parse(inputApptDate);
+				
+				this.when = new SimpleDateFormat("EEE MM/dd/yyyy, h:mm aa").parse(inputApptDate);
+				//this.when = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy").parse(inputApptDate);
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}

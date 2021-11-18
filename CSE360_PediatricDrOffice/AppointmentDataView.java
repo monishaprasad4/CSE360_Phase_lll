@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 
 public class AppointmentDataView {
 	private String date;
@@ -11,8 +12,10 @@ public class AppointmentDataView {
 	public AppointmentDataView(Appointment appointment, ITService itService)
 	{
 		
-		date = (appointment.getApptDate().getMonth()+1) + "/" + appointment.getApptDate().getDate() + "/" + (appointment.getApptDate().getYear()+1900);  
-		time = appointment.getApptDate().getHours() + ":" + appointment.getApptDate().getMinutes() + ":" + appointment.getApptDate().getMinutes();   
+		//date = (appointment.getApptDate().getMonth()+1) + "/" + appointment.getApptDate().getDate() + "/" + (appointment.getApptDate().getYear()+1900);
+		date = new SimpleDateFormat("MM/dd/yyyy").format(appointment.getApptDate());
+		//time = appointment.getApptDate().getHours() + ":" + appointment.getApptDate().getMinutes() + ":" + appointment.getApptDate().getMinutes();
+		time = new SimpleDateFormat("h:mm aa").format(appointment.getApptDate());
 		patientFullName = itService.getUserFullNameFromUniqueID(appointment.getPatientUniqueID());
 		reason = appointment.getReason();
 		doctorFullName = itService.getUserFullNameFromUniqueID(appointment.getDoctorUniqueID());
