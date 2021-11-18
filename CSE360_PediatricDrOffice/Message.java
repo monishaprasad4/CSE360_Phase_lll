@@ -19,17 +19,21 @@ public class Message {
 		if (replyDate == null || reply == null) {
 			// nothing to add to reply section
 		} else {
-			replySection = "Reply: " + "\n" 
+			replySection = "\nReply: " + "\n" 
 					+ getReplyDate_String() + "\n" 
-					+ "Reply: " + reply + "\n";
-		}				
+					+ "Reply: " + reply + "\n\n";
+		}
+
+		User sender = ITService.Instance.getUserFromUniqueID(senderUniqueID);
+		User recipient = ITService.Instance.getUserFromUniqueID(receiverUniqueID);
+		String recipientName = (recipient != null) ? recipient.getFirstName() + " " + recipient.getLastName() : "";
 		
-		return "Sender UID: " + senderUniqueID + "\n" 
+		return "Sender: " + sender.getFirstName() + " " + sender.getLastName() + "\n" 
+				+ "Recipient: " + recipientName + "\n"
 				+ "Recipient Type: " + getRecipient_String() + "\n"
-				+ "Recipient UID: " + receiverUniqueID + "\n" 
 				+ getSentDate_String() + "\n" 
-				+ "Subject: " + subject + "\n" 
-				+ "Body: " + body + "\n" 
+				+ "Subject: " + subject + "\n\n" 
+				+ body + "\n" 
 				+ replySection;
 	}
 	
@@ -92,7 +96,10 @@ public class Message {
 	}
 	
 	public String getSentDate_String() {
-		return sentDate.toString();
+		if (sentDate != null)
+			return sentDate.toString();
+		else
+			return "";
 	}
 	
 	public void setSentDate_String(String inputDate) {
@@ -114,11 +121,15 @@ public class Message {
 	}
 
 	public String getReplyDate_String() {
+		if (replyDate == null)
+		{
+			return "";
+		}
 		return replyDate.toString();
 	}
 	
 	public void setReplyDate_String(String inputDate) {
-		if (!inputDate.equalsIgnoreCase("null")) {
+		if (!inputDate.equalsIgnoreCase("null") && !inputDate.equalsIgnoreCase("")) {
 			try {
 				this.replyDate = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy").parse(inputDate);
 			} catch (ParseException e) {
