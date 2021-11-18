@@ -152,7 +152,7 @@ public class ui_Nurse_PatientsController {
 	        		// appointmentDates.add(appointments.get(i).getApptDate_String_Date());
 	        		Date date = appointments.get(i).getApptDate();
 	        		
-	        		String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
+	        		String formattedDate = new SimpleDateFormat("MM/dd/yyyy").format(date);
 	        		//appointmentDates.add(appointments.get(i).getApptDate().toString());
 	        		appointmentDates.add(formattedDate + "\t" + appointments.get(i).getReason());
 	    		}
