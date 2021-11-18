@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: lightgrey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui_Nurse_ScheduleApptsController">
+   <top>
+      <VBox prefHeight="81.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Pediatric Doctor's Office Portal" textAlignment="CENTER">
+               <font>
+                  <Font size="38.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="318.0" prefWidth="600.0">
+               <children>
+                  <VBox prefHeight="318.0" prefWidth="193.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="195.0" text="Select Patient" />
+                        <ListView fx:id="listViewPatients" prefHeight="301.0" prefWidth="193.0" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="318.0" prefWidth="204.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="206.0" text="Select Date" />
+                        <ListView fx:id="listViewAvailableDates" prefHeight="299.0" prefWidth="204.0" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="318.0" prefWidth="204.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="204.0" text="Reason" />
+                        <TextArea fx:id="textReason" prefHeight="71.0" prefWidth="204.0" />
+                        <Label prefHeight="17.0" prefWidth="204.0" />
+                        <Label prefHeight="0.0" prefWidth="202.0" text="Doctor" />
+                        <Label fx:id="labelDoctor" prefHeight="17.0" prefWidth="202.0" />
+                        <Label prefHeight="30.0" prefWidth="204.0" />
+                        <HBox prefHeight="28.0" prefWidth="204.0">
+                           <children>
+                              <Button fx:id="buttonScheduleAppt" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" text="Schedule" />
+                              <Button fx:id="buttonCancel" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Cancel" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
