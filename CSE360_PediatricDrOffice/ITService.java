@@ -18,6 +18,7 @@ public class ITService {
 	private ArrayList<Message> messages;
 	private ArrayList<Appointment> appointments;
 	String systemDataFileName = "systemdata.txt";
+	static public ITService Instance = null; 
 
 	public ITService() {
 		// default constructor
