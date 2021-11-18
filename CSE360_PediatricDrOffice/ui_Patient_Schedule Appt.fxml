@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui_Patient_ScheduleApptController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: lightgrey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui_Patient_ScheduleApptController">
    <top>
       <VBox prefHeight="79.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -56,6 +56,12 @@
                               <TextField fx:id="upcomingApptDateTextField" editable="false" prefHeight="25.0" prefWidth="205.0" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
+                        <HBox prefHeight="35.0" prefWidth="295.0">
+                           <children>
+                              <Label fx:id="label_Reason2" prefHeight="34.0" prefWidth="83.0" text="Reason" />
+                              <TextField fx:id="textField_Reason2" prefHeight="25.0" prefWidth="210.0" />
+                           </children>
+                        </HBox>
                         <Button fx:id="cancelAppointment" mnemonicParsing="false" onAction="#ButtonHandlerCancelAppt" prefHeight="30.0" prefWidth="297.0" text="Cancel Appointment">
                            <font>
                               <Font size="14.0" />
@@ -72,11 +78,13 @@
                            </font>
                         </Label>
                         <ListView fx:id="availableApptListView" prefHeight="200.0" prefWidth="200.0" />
-                        <Button fx:id="scheduleAppointment" mnemonicParsing="false" onAction="#ButtonHandlerScheduleAppt" text="Schedule Appointment">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Button>
+                        <HBox prefHeight="43.0" prefWidth="255.0">
+                           <children>
+                              <Label fx:id="label_Reason1" prefHeight="35.0" prefWidth="56.0" text="Reason:" />
+                              <TextField fx:id="textField_Reason" prefHeight="23.0" prefWidth="199.0" />
+                           </children>
+                        </HBox>
+                        <Button fx:id="scheduleAppointment" mnemonicParsing="false" onAction="#ButtonHandlerScheduleAppt" prefHeight="32.0" prefWidth="255.0" text="Schedule Appointment" />
                      </children>
                   </VBox>
                </children>

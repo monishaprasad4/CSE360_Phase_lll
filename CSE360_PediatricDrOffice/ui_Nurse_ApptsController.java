@@ -27,6 +27,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 
 import java.io.IOException;
@@ -34,316 +35,371 @@ import java.io.IOException;
 public class ui_Nurse_ApptsController {
 
 	private Stage primaryStage;
-	
-	@FXML private Menu menuBar_Appointments;
-	@FXML private Menu menuBar_Patients;
-	@FXML private Menu menuBar_Messages;
-	@FXML private Menu menuBar_Today;
-	@FXML private Menu menuBar_All;
-	@FXML private Menu menuBar_Search;
-	@FXML private Menu menuBar_Delete;
-	@FXML private Menu menuBar_New;
-	@FXML private TableView<AppointmentDataView> tableView_Appointments;
-    @FXML private TableColumn<AppointmentDataView, String> dateColumn;
-    @FXML private TableColumn<AppointmentDataView, String> timeColumn;
-    @FXML private TableColumn<AppointmentDataView, String> patientColumn;
-    @FXML private TableColumn<AppointmentDataView, String> reasonColumn;
-    @FXML private TableColumn<AppointmentDataView, String> doctorColumn;
-    
+
+	@FXML
+	private Menu menuBar_Appointments;
+	@FXML
+	private Menu menuBar_Patients;
+	@FXML
+	private Menu menuBar_Messages;
+	@FXML
+	private Menu menuBar_Today;
+	@FXML
+	private Menu menuBar_All;
+	@FXML
+	private Menu menuBar_Search;
+	@FXML
+	private Menu menuBar_Delete;
+	@FXML
+	private Menu menuBar_New;
+	@FXML
+	private TableView<AppointmentDataView> tableView_Appointments;
+	@FXML
+	private TableColumn<AppointmentDataView, String> dateColumn;
+	@FXML
+	private TableColumn<AppointmentDataView, String> timeColumn;
+	@FXML
+	private TableColumn<AppointmentDataView, String> patientColumn;
+	@FXML
+	private TableColumn<AppointmentDataView, String> reasonColumn;
+	@FXML
+	private TableColumn<AppointmentDataView, String> doctorColumn;
+
 	private ITService currentITService;
 	private User currentUser;
-		
-    @FXML
-    private ResourceBundle resources;
 
-    @FXML
-    private URL location;
-
-    public ui_Nurse_ApptsController() {
-    	
-    }    
-    
-    @SuppressWarnings("deprecation")
 	@FXML
-    private void initialize() {
-    	
-    	Label label = new Label("Appointments");
-    	label.setOnMouseClicked(new EventHandler<MouseEvent>() {
-    	    @Override
-    	    public void handle(MouseEvent event) {
-    	    	try {
-    	    		menuBarClick_Appointments();
+	private ResourceBundle resources;
+
+	@FXML
+	private URL location;
+
+	public ui_Nurse_ApptsController() {
+
+	}
+
+	@SuppressWarnings("deprecation")
+	@FXML
+	private void initialize() {
+
+		Label label = new Label("Appointments");
+		label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				try {
+					menuBarClick_Appointments();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-    	    }
-    	});
-    	
-    	menuBar_Appointments.setGraphic(label);
-    	    	
-    	label = new Label("Patients");
-    	label.setOnMouseClicked(new EventHandler<MouseEvent>() {
-    	    @Override
-    	    public void handle(MouseEvent event) {
-    	    	try {
-    	    		menuBarClick_Patients();
+			}
+		});
+
+		menuBar_Appointments.setGraphic(label);
+
+		label = new Label("Patients");
+		label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				try {
+					menuBarClick_Patients();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-    	    }
-    	});
-    	
-    	menuBar_Patients.setGraphic(label);
-    	
-    	label = new Label("Messages");
-    	label.setOnMouseClicked(new EventHandler<MouseEvent>() {
-    	    @Override
-    	    public void handle(MouseEvent event) {
-    	    	try {
+			}
+		});
+
+		menuBar_Patients.setGraphic(label);
+
+		label = new Label("Messages");
+		label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				try {
 					menuBarClick_Messages();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-    	    }
-    	});
-    	
-    	menuBar_Messages.setGraphic(label);
-    	
-    	label = new Label("Today");
-    	label.setOnMouseClicked(new EventHandler<MouseEvent>() {
-    	    @Override
-    	    public void handle(MouseEvent event) {
-    	    	try {
-    	    		menuBarClick_Appointments_Today();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-    	    }
-    	});
-    	
-    	menuBar_Today.setGraphic(label);
-    	
-    	label = new Label("All");
-    	label.setOnMouseClicked(new EventHandler<MouseEvent>() {
-    	    @Override
-    	    public void handle(MouseEvent event) {
-    	    	try {
-    	    		menuBarClick_Appointments_All();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-    	    }
-    	});
-    	
-    	menuBar_All.setGraphic(label);
-    	
-    	label = new Label("Search");
-    	label.setOnMouseClicked(new EventHandler<MouseEvent>() {
-    	    @Override
-    	    public void handle(MouseEvent event) {
-    	    	try {
-    	    		menuBarClick_Appointments_Search();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-    	    }
-    	});
-    	
-    	menuBar_Search.setGraphic(label);
-    	
-    	label = new Label("Delete");
-    	label.setOnMouseClicked(new EventHandler<MouseEvent>() {
-    	    @Override
-    	    public void handle(MouseEvent event) {
-    	    	try {
-    	    		menuBarClick_Appointments_Delete();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-    	    }
-    	});
-    	
-    	menuBar_Delete.setGraphic(label);
-    	
-    	label = new Label("New");
-    	label.setOnMouseClicked(new EventHandler<MouseEvent>() {
-    	    @Override
-    	    public void handle(MouseEvent event) {
-    	    	try {
-    	    		menuBarClick_Appointments_New();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-    	    }
-    	});
-    	
-    	menuBar_New.setGraphic(label);
-    	
-    	dateColumn.setCellValueFactory(new PropertyValueFactory<AppointmentDataView, String>("date"));
-    	timeColumn.setCellValueFactory(new PropertyValueFactory<AppointmentDataView, String>("time"));
-    	patientColumn.setCellValueFactory(new PropertyValueFactory<AppointmentDataView, String>("patientFullName"));
-    	reasonColumn.setCellValueFactory(new PropertyValueFactory<AppointmentDataView, String>("reason"));
-    	doctorColumn.setCellValueFactory(new PropertyValueFactory<AppointmentDataView, String>("doctorFullName"));    	
-    }   	
-    
-    public void initializeController(Stage stage, User currentUser, ITService currentITService) {
-    	this.primaryStage = stage;
-    	this.currentUser = currentUser;
-    	this.currentITService = currentITService;
-    	
-    	primaryStage.setOnCloseRequest(event -> {
-    	    System.out.println("Closing, print updated information to database (file)");
-    	    currentITService.printToFile();
-    	});
-    	
-    	updateAppointmentsList();
-    }
-    
-    @FXML
-    private void menuBarClick_Appointments() throws Exception {
-    	System.out.println("Nurse/Doctor Appts - Menu Bar Click - Appointments");
+			}
+		});
 
-    	// switch UI
+		menuBar_Messages.setGraphic(label);
+
+		label = new Label("Today");
+		label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				try {
+					menuBarClick_Appointments_Today();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
+		menuBar_Today.setGraphic(label);
+
+		label = new Label("All");
+		label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				try {
+					menuBarClick_Appointments_All();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
+		menuBar_All.setGraphic(label);
+
+		label = new Label("Search");
+		label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				try {
+					menuBarClick_Appointments_Search();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
+		menuBar_Search.setGraphic(label);
+
+		label = new Label("Delete");
+		label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				try {
+					menuBarClick_Appointments_Delete();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
+		menuBar_Delete.setGraphic(label);
+
+		label = new Label("New");
+		label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				try {
+					menuBarClick_Appointments_New();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
+		menuBar_New.setGraphic(label);
+
+		dateColumn.setCellValueFactory(new PropertyValueFactory<AppointmentDataView, String>("date"));
+		timeColumn.setCellValueFactory(new PropertyValueFactory<AppointmentDataView, String>("time"));
+		patientColumn.setCellValueFactory(new PropertyValueFactory<AppointmentDataView, String>("patientFullName"));
+		reasonColumn.setCellValueFactory(new PropertyValueFactory<AppointmentDataView, String>("reason"));
+		doctorColumn.setCellValueFactory(new PropertyValueFactory<AppointmentDataView, String>("doctorFullName"));
+	}
+
+	public void initializeController(Stage stage, User currentUser, ITService currentITService) {
+		this.primaryStage = stage;
+		this.currentUser = currentUser;
+		this.currentITService = currentITService;
+
+		primaryStage.setOnCloseRequest(event -> {
+			System.out.println("Closing, print updated information to database (file)");
+			currentITService.printToFile();
+		});
+
+		updateAppointmentsList();
+	}
+
+	@FXML
+	private void menuBarClick_Appointments() throws Exception {
+		System.out.println("Nurse/Doctor Appts - Menu Bar Click - Appointments");
+
+		// switch UI
 		FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(ApplicationDriver.class.getResource("ui_Nurse_Appts.fxml"));
-        BorderPane borderPane = loader.<BorderPane>load();
-        
-        ui_Nurse_ApptsController controller = (ui_Nurse_ApptsController)loader.getController();
-        controller.initializeController(primaryStage, currentUser, currentITService);
-        
-        Scene scene = new Scene(borderPane);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-    
-    @FXML
-    private void menuBarClick_Patients() throws Exception {
-    	System.out.println("Nurse/Doctor Appts - Menu Bar Click - Patients");
-    	
-    	if (currentUser.getUserType() == UserType.DOCTOR) {
-    		// Doctor
-    		// switch UI
-    		FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(ApplicationDriver.class.getResource("ui_Doctor_Patients.fxml"));
-            BorderPane borderPane = loader.<BorderPane>load();
-            
-            ui_Doctor_PatientsController controller = (ui_Doctor_PatientsController)loader.getController();
-            controller.initializeController(primaryStage, currentUser, currentITService);
-            
-            Scene scene = new Scene(borderPane);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-    	} else {
-    		// Nurse
-    		// switch UI
-    		FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(ApplicationDriver.class.getResource("ui_Nurse_Patients.fxml"));
-            BorderPane borderPane = loader.<BorderPane>load();
-            
-            ui_Nurse_PatientsController controller = (ui_Nurse_PatientsController)loader.getController();
-            controller.initializeController(primaryStage, currentUser, currentITService);
-            
-            Scene scene = new Scene(borderPane);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-    	}
-    }
-    
-    @FXML
-    private void menuBarClick_Messages() throws Exception {
-    	System.out.println("Nurse/Doctor Appts - Menu Bar Click - Messages");
+		loader.setLocation(ApplicationDriver.class.getResource("ui_Nurse_Appts.fxml"));
+		BorderPane borderPane = loader.<BorderPane>load();
 
-    	if (currentUser.getUserType() == UserType.DOCTOR) {
-    		// Doctor
-    		// switch UI
-    		FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(ApplicationDriver.class.getResource("ui_Doctor_Messages.fxml"));
-            BorderPane borderPane = loader.<BorderPane>load();
-            
-            ui_Doctor_MessagesController controller = (ui_Doctor_MessagesController)loader.getController();
-            controller.initializeController(primaryStage, currentUser, currentITService);
-            
-            Scene scene = new Scene(borderPane);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-    	} else {
-    		// Nurse
-    		// switch UI
-    		FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(ApplicationDriver.class.getResource("ui_Nurse_Messages.fxml"));
-            BorderPane borderPane = loader.<BorderPane>load();
-            
-            ui_Nurse_MessagesController controller = (ui_Nurse_MessagesController)loader.getController();
-            controller.initializeController(primaryStage, currentUser, currentITService);
-            
-            Scene scene = new Scene(borderPane);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-    	}
-    }
-    
-    @FXML
-    private void menuBarClick_Appointments_New() throws Exception {
-    	System.out.println("New Appointment");
-    }
-    
-    @FXML
-    private void menuBarClick_Appointments_All() throws Exception {
-    	System.out.println("Display All Appointments");
-    }
-    
-    @FXML
-    private void menuBarClick_Appointments_Search() throws Exception {
-    	System.out.println("Search Appointment");
-    }
-    
-    @FXML
-    private void menuBarClick_Appointments_Delete() throws Exception {
-    	System.out.println("Delete Appointment");
-    	
-    	if (tableView_Appointments.getItems().size() > 0) {
-    		
-    		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Delete this appointment?", ButtonType.YES, ButtonType.NO);
-    		alert.setTitle("Doctor's Office Portal");
-	        ButtonType result = alert.showAndWait().orElse(ButtonType.NO);
-    	        
-  	        if (ButtonType.YES.equals(result)) {
-  	        	Appointment appt = tableView_Appointments.getSelectionModel().getSelectedItem().getAppointment();
-  	        	currentITService.cancelAppointment(appt);
-    		
-  	        	updateAppointmentsList();
-  	        }
-    	}
-    }
-    
-    @FXML
-    private void menuBarClick_Appointments_Today() throws Exception {
-    	System.out.println("Appointments Today");
-    }
-    
-    private void updateAppointmentsList()
-    {
-    	ArrayList<Appointment> list;
-    	if (currentUser.getUserType() == UserType.NURSE)
-    	{
-    		list = currentITService.getAppointments();
-    	}
-    	else
-    	{
-    		list = currentITService.getAppointmentsForUser(currentUser.getUniqueID());
-    	}
-    	
-    	ArrayList<AppointmentDataView> appointmentDataList = new ArrayList<AppointmentDataView>();
-    	for(int i = 0; i < list.size(); i++)
-    	{
-    		appointmentDataList.add(new AppointmentDataView(list.get(i), currentITService));
-    	}
-    	
-    	ObservableList data = FXCollections.observableList(appointmentDataList);
-    	tableView_Appointments.setItems(data);
-    	
-    	if (tableView_Appointments.getItems().size() > 0) {
-    		tableView_Appointments.getSelectionModel().selectFirst();
-    	}
-    }
+		ui_Nurse_ApptsController controller = (ui_Nurse_ApptsController) loader.getController();
+		controller.initializeController(primaryStage, currentUser, currentITService);
+
+		Scene scene = new Scene(borderPane);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
+
+	@FXML
+	private void menuBarClick_Patients() throws Exception {
+		System.out.println("Nurse/Doctor Appts - Menu Bar Click - Patients");
+
+		if (currentUser.getUserType() == UserType.DOCTOR) {
+			// Doctor
+			// switch UI
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(ApplicationDriver.class.getResource("ui_Doctor_Patients.fxml"));
+			BorderPane borderPane = loader.<BorderPane>load();
+
+			ui_Doctor_PatientsController controller = (ui_Doctor_PatientsController) loader.getController();
+			controller.initializeController(primaryStage, currentUser, currentITService);
+
+			Scene scene = new Scene(borderPane);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} else {
+			// Nurse
+			// switch UI
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(ApplicationDriver.class.getResource("ui_Nurse_Patients.fxml"));
+			BorderPane borderPane = loader.<BorderPane>load();
+
+			ui_Nurse_PatientsController controller = (ui_Nurse_PatientsController) loader.getController();
+			controller.initializeController(primaryStage, currentUser, currentITService);
+
+			Scene scene = new Scene(borderPane);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		}
+	}
+
+	@FXML
+	private void menuBarClick_Messages() throws Exception {
+		System.out.println("Nurse/Doctor Appts - Menu Bar Click - Messages");
+
+		if (currentUser.getUserType() == UserType.DOCTOR) {
+			// Doctor
+			// switch UI
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(ApplicationDriver.class.getResource("ui_Doctor_Messages.fxml"));
+			BorderPane borderPane = loader.<BorderPane>load();
+
+			ui_Doctor_MessagesController controller = (ui_Doctor_MessagesController) loader.getController();
+			controller.initializeController(primaryStage, currentUser, currentITService);
+
+			Scene scene = new Scene(borderPane);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} else {
+			// Nurse
+			// switch UI
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(ApplicationDriver.class.getResource("ui_Nurse_Messages.fxml"));
+			BorderPane borderPane = loader.<BorderPane>load();
+
+			ui_Nurse_MessagesController controller = (ui_Nurse_MessagesController) loader.getController();
+			controller.initializeController(primaryStage, currentUser, currentITService);
+
+			Scene scene = new Scene(borderPane);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		}
+	}
+
+	@FXML
+	private void menuBarClick_Appointments_New() throws Exception {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(ApplicationDriver.class.getResource("ui_Nurse_ScheduleAppts.fxml"));
+		BorderPane borderPane = loader.<BorderPane>load();
+
+		ui_Nurse_ScheduleApptsController controller = (ui_Nurse_ScheduleApptsController) loader.getController();
+		controller.initializeController(primaryStage, currentUser, currentITService);
+
+		Scene scene = new Scene(borderPane);
+		Stage dialog = new Stage();
+		dialog.setScene(scene);
+		dialog.showAndWait();
+	}
+
+	@FXML
+	private void menuBarClick_Appointments_All() throws Exception {
+		updateAppointmentsList();
+	}
+
+	@FXML
+	private void menuBarClick_Appointments_Search() throws Exception {
+		System.out.println("Search Appointment");
+	}
+
+	@FXML
+	private void menuBarClick_Appointments_Delete() throws Exception {
+		System.out.println("Delete Appointment");
+
+		if (tableView_Appointments.getItems().size() > 0) {
+
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Delete this appointment?", ButtonType.YES,
+					ButtonType.NO);
+			alert.setTitle("Doctor's Office Portal");
+			ButtonType result = alert.showAndWait().orElse(ButtonType.NO);
+
+			if (ButtonType.YES.equals(result)) {
+				Appointment appt = tableView_Appointments.getSelectionModel().getSelectedItem().getAppointment();
+				currentITService.cancelAppointment(appt);
+
+				updateAppointmentsList();
+			}
+		}
+	}
+
+	@FXML
+	private void menuBarClick_Appointments_Today() throws Exception {
+		System.out.println("Appointments Today");
+	}
+
+	private void updateAppointmentsList() {
+		ArrayList<Appointment> list;
+		if (currentUser.getUserType() == UserType.NURSE) {
+			list = currentITService.getAppointments();
+		} else {
+			list = currentITService.getAppointmentsForUser(currentUser.getUniqueID());
+		}
+
+		ArrayList<AppointmentDataView> appointmentDataList = new ArrayList<AppointmentDataView>();
+		for (int i = 0; i < list.size(); i++) {
+			appointmentDataList.add(new AppointmentDataView(list.get(i), currentITService));
+		}
+
+		ObservableList data = FXCollections.observableList(appointmentDataList);
+		tableView_Appointments.setItems(data);
+
+		if (tableView_Appointments.getItems().size() > 0) {
+			tableView_Appointments.getSelectionModel().selectFirst();
+		}
+
+		tableView_Appointments.setRowFactory(tv -> {
+			TableRow<AppointmentDataView> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (!row.isEmpty())) {
+					AppointmentDataView rowData = row.getItem();
+
+					FXMLLoader loader = new FXMLLoader();
+					loader.setLocation(ApplicationDriver.class.getResource("ui_Patient_Visit Detail.fxml"));
+					BorderPane borderPane;
+					try {
+						borderPane = loader.<BorderPane>load();
+
+						ui_Patient_VisitDetailController controller = (ui_Patient_VisitDetailController) loader
+								.getController();
+
+						Appointment appointment = rowData.getAppointment();
+						// User patient =
+						// currentITService.getUserFromUniqueID(rowData.getAppointment().getPatientUniqueID());
+						controller.initializeController(primaryStage, appointment, currentITService);
+
+						Scene scene = new Scene(borderPane);
+
+						Stage dialog = new Stage();
+						dialog.setScene(scene);
+						dialog.showAndWait();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+			});
+			return row;
+		});
+	}
 }
