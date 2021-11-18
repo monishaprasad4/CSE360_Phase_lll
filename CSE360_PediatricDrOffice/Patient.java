@@ -175,11 +175,15 @@ public class Patient extends User {
 	}
 	
 	public  String toString() {
+		 
+		String allergies = knownAllergies.equalsIgnoreCase("null") ? "" : knownAllergies;
+				
 		return "Name: " + getFirstName() + " " + getLastName() + "\n" +
-				"DOB: " + super.getDOB() + "\n" +
+				"Date of Birth: " + super.getDOB() + "\n" +
 				"Phone: " + super.getPhoneNumber() + "\n" +
 				"Email: " + super.getEmail() + "\n\n" + 
-				"Known Allergies: " + knownAllergies + "\n" +
-				"Pharmacy: " + pharmacy.getName();
+				"Known Allergies: " + allergies + "\n\n" + 
+				"Pharmacy:\n" + pharmacy.getName() + "\n" + getPharmacy_StreetAddress() + "\n\n" +
+				"Insurance: " + getInsurance_Name();
 	}
 }
