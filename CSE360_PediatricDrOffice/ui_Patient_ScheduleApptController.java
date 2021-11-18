@@ -1,4 +1,5 @@
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -35,6 +36,10 @@ public class ui_Patient_ScheduleApptController {
 	@FXML private Menu menuBar_Messages;
 	@FXML private Menu menuBar_ScheduleAppt;
 	@FXML private Menu menuBar_Doctors;
+	@FXML private TextField textField_Reason;
+	@FXML private TextField textField_Reason2;
+	@FXML private Label label_Reason1;
+	@FXML private Label label_Reason2;
 	private ITService currentITService;
 	private User currentUser;
 	private Appointment upcomingAppointment = null;
@@ -140,11 +145,12 @@ public class ui_Patient_ScheduleApptController {
     	if (upcomingAppointment == null) {
         	showSection(null);
     	} else {
-        	showSection(upcomingAppointment.getApptDate().toString());    		
+        	showSection(upcomingAppointment);    		
     	}
     }
     
-    private void showSection(String upcomingAppointmentDate) {
+    private void showSection(Appointment upcomingAppointment) {
+    	String upcomingAppointmentDate = (upcomingAppointment != null) ?upcomingAppointment.getApptDate().toString() : null;
     	if (upcomingAppointmentDate == null) {
     		// get upcoming available appointments for doctor
     		upcomingAvailableAppointmentsForDoctor = currentITService.getUpcomingAvailableAppointmentsForDoctor(((Patient)currentUser).getDoctorUniqueID());
@@ -168,25 +174,39 @@ public class ui_Patient_ScheduleApptController {
 	    	upcomingApptDateTextField.setVisible(false);
 	    	labelUpcomingAppt.setVisible(false);
         	labelUpcomingApptDate.setVisible(false);
+        	label_Reason2.setVisible(false);
+        	textField_Reason2.setVisible(false);;
+        	
         	
         	// show schedule appointment section 
 	    	scheduleAppointment.setVisible(true);
 	    	availableApptListView.setVisible(true);
-	    	labelScheduleAppt.setVisible(true);  
+	    	labelScheduleAppt.setVisible(true);
+	    	label_Reason1.setVisible(true);
+	    	textField_Reason.setVisible(true);
+	    	
     	} else {
     		upcomingApptDateTextField.setText(upcomingAppointmentDate);
+    		if (upcomingAppointment.getReason() != null )
+    		{    		
+    			textField_Reason2.setText(upcomingAppointment.getReason()); 
+    		}
     		
 	    	// show upcoming appointment section
         	cancelAppointment.setVisible(true);
         	upcomingApptDateTextField.setVisible(true);
         	labelUpcomingAppt.setVisible(true);
         	labelUpcomingApptDate.setVisible(true);
+        	label_Reason2.setVisible(true);
+        	textField_Reason2.setVisible(true);;
         	
 	    	
 	    	// hide schedule appointment section
         	scheduleAppointment.setVisible(false);
         	availableApptListView.setVisible(false);
         	labelScheduleAppt.setVisible(false);
+        	label_Reason1.setVisible(false);
+	    	textField_Reason.setVisible(false);
     	}
     }
      
@@ -283,11 +303,15 @@ public class ui_Patient_ScheduleApptController {
         	upcomingAppointment.setPatientUniqueID(currentUser.getUniqueID());
         	upcomingAppointment.setDoctorUniqueID(((Patient)currentUser).getDoctorUniqueID());
         	upcomingAppointment.setApptDate_String(upcomingAvailableAppointmentsForDoctor.get(currentSelectionIndex));
-        	upcomingAppointment.setUniqueID(upcomingAppointment.getApptDate().toString() + " " + currentUser.getUniqueID() + " " + ((Patient)currentUser).getDoctorUniqueID());
+        	
+        	String dateString = new SimpleDateFormat("EEE MM/dd/yyyy, h:mm aa").format(upcomingAppointment.getApptDate());
+        	upcomingAppointment.setUniqueID(dateString + " " + currentUser.getUniqueID() + " " + ((Patient)currentUser).getDoctorUniqueID());
+        	upcomingAppointment.setReason(textField_Reason.getText().trim());
+        	
         	currentITService.scheduleAppointment(upcomingAppointment);
         	
         	// update UI
-            showSection(upcomingAppointment.getApptDate().toString());
+            showSection(upcomingAppointment);
     	}
     }
 
