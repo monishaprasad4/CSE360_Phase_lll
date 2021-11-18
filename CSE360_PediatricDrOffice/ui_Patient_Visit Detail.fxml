@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: lightgrey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui_Patient_VisitDetailController">
+   <top>
+      <VBox prefHeight="79.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Pediatric Doctor's Office Portal" textAlignment="CENTER">
+               <font>
+                  <Font size="38.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <MenuBar fx:id="menuBar" />
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <VBox prefHeight="305.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="333.0" prefWidth="600.0">
+               <children>
+                  <VBox prefHeight="320.0" prefWidth="50.0" />
+                  <VBox prefHeight="320.0" prefWidth="433.0">
+                     <children>
+                        <Label fx:id="visitDetailsLabel" prefHeight="20.0" prefWidth="324.0" text="Visit Details">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <GridPane prefHeight="51.0" prefWidth="433.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.0" minWidth="10.0" prefWidth="144.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.0" minWidth="10.0" prefWidth="77.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="7.0" prefWidth="20.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.0" minWidth="10.0" prefWidth="86.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Weight (lbs)" />
+                              <Label text="Height (in)" GridPane.columnIndex="3" />
+                              <Label text="Temperature (F)" GridPane.rowIndex="1" />
+                              <Label text="Blood Pressure" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <TextField fx:id="weightTextField" editable="false" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" />
+                              <TextField fx:id="temperatureTextField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="heightTextField" editable="false" GridPane.columnIndex="4" />
+                              <TextField fx:id="bloodPressureTextField" editable="false" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                        <GridPane prefHeight="74.0" prefWidth="433.0">
+                           <children>
+                              <Label text="Known Allergies" />
+                              <Label text="General Health Concerns" GridPane.rowIndex="1" />
+                              <TextArea fx:id="knownAllergiesTextArea" editable="false" prefHeight="77.0" prefWidth="291.0" GridPane.columnIndex="1" />
+                              <TextArea fx:id="generalHealthConcernsTextArea" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="212.0" minWidth="10.0" prefWidth="148.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="285.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                        <GridPane prefHeight="74.0" prefWidth="433.0">
+                           <children>
+                              <Label text="Physical Test Findings" />
+                              <Label text="Perscriptions" GridPane.rowIndex="1" />
+                              <TextArea fx:id="physicalTestFindingsTextArea" editable="false" prefHeight="77.0" prefWidth="291.0" GridPane.columnIndex="1" />
+                              <TextArea fx:id="PrescriptionsTextArea" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="212.0" minWidth="10.0" prefWidth="148.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="285.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                        <Label text="Patient History">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <GridPane prefHeight="100.0" prefWidth="434.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label text="Previous Health Issues" />
+                                    <Label text="Perscribed Medications" GridPane.columnIndex="1" />
+                                    <Label text="History of Immunizations" GridPane.columnIndex="2" />
+                                    <TextArea fx:id="previousHealthIssuesTextArea" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                                    <TextArea fx:id="prescribedMedicationsTextArea" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextArea fx:id="historyOfImmunizationsTextArea" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="245.0" prefWidth="115.0">
+                     <children>
+                        <VBox prefHeight="292.0" prefWidth="115.0" />
+                        <Button fx:id="buttonClose" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Close" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
